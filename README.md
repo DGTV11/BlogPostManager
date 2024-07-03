@@ -1,7 +1,7 @@
 # Portfolio generator
 
 ## Description
-TL;DR -> this locally hosted flask app will essentially take in your achievements, details, etc and make you a portfolio website for those who are too lazy to make it themselves (like Daniel, who is too lazy to update his github pages website) 🙂
+TL;DR -> this locally hosted Flask/Gradio app will essentially take in your achievements, details, etc and make you a portfolio website for those who are too lazy to make it themselves (like Daniel, who is too lazy to update his github pages website) 🙂
 
 ### Primary template:
 1) Name
