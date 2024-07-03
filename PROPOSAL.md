@@ -26,7 +26,7 @@
 - Styling Control (customize color palette, font size, fonts)
 - Content Preview (live preview before publishing)
 - Automatic GitHub Deployment (auto-push changes)
-- Contact Information Management (update contact details, add social media links
+- Contact Information Management (update contact details, add social media links)
 
 ### Advanced Features
 - Search Functionality (search bar, filter by categories/tags)
@@ -40,6 +40,4 @@
 
 ### Security Features
 - Data Encryption (encrypt sensitive data)
-- Activity Logs (track and log user activities)
-- Captcha for Forms (prevent spam with CAPTCHA)
 ```
