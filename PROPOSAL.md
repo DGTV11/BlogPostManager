@@ -6,7 +6,7 @@
 ### Primary Details (on Sidebar/About):
 1. **Name**
 2. **Profession** (e.g., student)
-3. **Contact Details**
+3. **Contact Details** (optional)
 4. **Links to GitHub/Socials** (will always be on the sidebar, like [this website](https://sawntoe.github.io))
 
 ### Extra Control:
@@ -26,25 +26,19 @@
 - Styling Control (customize color palette, font size, fonts)
 - Content Preview (live preview before publishing)
 - Automatic GitHub Deployment (auto-push changes)
-- Contact Information Management (update contact details, add social media links)
-- SEO Optimization (meta tags, descriptions, sitemap)
+- Contact Information Management (update contact details, add social media links
 
 ### Advanced Features
-- User Roles and Permissions (admin, editor, viewer)
-- Analytics Integration (Google Analytics)
-- Comment System (allow, moderate comments)
 - Search Functionality (search bar, filter by categories/tags)
 - Media Management (upload, manage images/media)
-- Backup and Restore (regular backups, restore previous versions)
+- Backup and Restore (regular backups, restore previous versions) (can take advantage of Git as a version manager)
 - Drafts and Publishing (save drafts, schedule posts)
 - Notification System (email notifications, system alerts)
 - Customization of Layout (drag-and-drop sidebar, customizable footer/header)
-- Plugins and Extensions (support third-party plugins)
 - Multilingual Support (multiple languages, easy translation)
 - Responsive Design (mobile-friendly, optimized for various screens)
 
 ### Security Features
-- SSL/TLS Support (secure HTTPS connections)
 - Data Encryption (encrypt sensitive data)
 - Activity Logs (track and log user activities)
 - Captcha for Forms (prevent spam with CAPTCHA)
