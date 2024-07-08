@@ -1,3 +1,4 @@
+from glob import glob
 import os
 
 from flask import Flask, render_template, abort
@@ -5,8 +6,13 @@ from markupsafe import escape
 
 app = Flask(__name__)
 
-def list_blog_posts():
-    return list(filter(lambda folder_name: not (folder_name.startswith('_') or folder_name.startswith('.')), os.listdir(os.path.join(os.path.dirname(__file__), "blog-posts"))))
+class BlogPost:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def list_blog_posts():
+        return glob(os.path.join(os.path.dirname(__file__), "blog-posts", "*", "")
 
 @app.route('/info')
 def info():
@@ -14,16 +20,16 @@ def info():
 
 @app.route('/')
 def main():
+    get_post_route = lambda pname: url_for('posts', pname) 
+    post_tags = [f"<a href='{get_post_route(post_name)}'>{post_name}</a>" for post_name in BlogPost.list_blog_posts()]
     return f"""<h1>Blog Post Manager</h1>
-    
-    """
+    <h2>Blog Posts</h2>
+    """ + '\n'.post_tags
 
 @app.route('/posts/<string>')
 def edit_post(post_name):
-    if post_name not in list_blog_posts():
+    if post_name not in BlogPost.list_blog_posts():
         abort(404) #TODO: make error page more user-friendly
-
-
 
 if __name__ == "__main__":
     app.run()
