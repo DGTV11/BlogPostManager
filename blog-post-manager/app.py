@@ -24,7 +24,7 @@ def main():
     post_tags = [f"<a href='{get_post_route(post_name)}'>{post_name}</a>" for post_name in BlogPost.list_blog_posts()]
     return f"""<h1>Blog Post Manager</h1>
     <h2>Blog Posts</h2>
-    """ + '\n'.post_tags
+    """ + '\n'.join(post_tags)
 
 @app.route('/posts/<string>')
 def edit_post(post_name):
