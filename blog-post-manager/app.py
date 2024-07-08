@@ -1,7 +1,8 @@
 from glob import glob
 import os
 
-from flask import Flask, render_template, abort
+from flask import Flask, url_for, request, render_template, abort
+
 from markupsafe import escape
 
 app = Flask(__name__)
@@ -26,10 +27,16 @@ def main():
     <h2>Blog Posts</h2>
     """ + '\n'.join(post_tags)
 
-@app.route('/posts/<string>')
+@app.route('/posts/<string>', methods=["GET", "POST"])
 def edit_post(post_name):
     if post_name not in BlogPost.list_blog_posts():
         abort(404) #TODO: make error page more user-friendly
+    if request.method == "POST":
+        title = request.form["title"]
+        content= request.form["content"]
+        return
+
+    return render_template("form.html")
 
 if __name__ == "__main__":
     app.run()
