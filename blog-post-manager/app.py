@@ -14,22 +14,21 @@ class BlogPost:
     def list_blog_posts():
         return glob(os.path.join(os.path.dirname(__file__), "blog-posts", "*", ""))
 
+#Stuff
 @app.route('/info')
 def info():
-    return render_template(os.path.join(os.path.dirname(__file__), "templates", "app-templates", "info.html"))
+    return render_template("info.html")
 
-@app.route('/')
-def main():
-    get_post_route = lambda pname: url_for('posts', pname) 
-    post_tags = [f"<a href='{get_post_route(post_name)}'>{post_name}</a>" for post_name in BlogPost.list_blog_posts()]
-    return f"""<h1>Blog Post Manager</h1>
-    <h2>Blog Posts</h2>
-    """ + '\n'.join(post_tags)
 
 @app.route('/posts/<string>')
 def edit_post(post_name):
     if post_name not in BlogPost.list_blog_posts():
         abort(404) #TODO: make error page more user-friendly
+
+# Main
+@app.route('/')
+def main():
+    return render_template("info.html", post_names=BlogPost.list_blog_posts())
 
 if __name__ == "__main__":
     app.run()
