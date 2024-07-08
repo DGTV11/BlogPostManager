@@ -21,7 +21,7 @@ def main():
 
 @app.route('/posts/<string>')
 def edit_post(post_name):
-    
+    pass
 
 if __name__ == "__main__":
     app.run()
