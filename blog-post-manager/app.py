@@ -7,6 +7,7 @@ from markupsafe import escape
 
 app = Flask(__name__)
 
+
 class BlogPost:
     def __init__(self):
         date = self.date
@@ -17,22 +18,17 @@ class BlogPost:
     def list_blog_posts():
         return glob(os.path.join(os.path.dirname(__file__), "blog-posts", "*", ""))
 
-@app.route('/info')
+
+# Stuff
+@app.route("/info")
 def info():
-    return render_template(os.path.join(os.path.dirname(__file__), "templates", "app-templates", "info.html"))
+    return render_template("info.html")
 
-@app.route('/')
-def main():
-    get_post_route = lambda pname: url_for('posts', pname) 
-    post_tags = [f"<a href='{get_post_route(post_name)}'>{post_name}</a>" for post_name in BlogPost.list_blog_posts()]
-    return f"""<h1>Blog Post Manager</h1>
-    <h2>Blog Posts</h2>
-    """ + '\n'.join(post_tags)
 
-@app.route('/posts/<string>', methods=["GET", "POST"])
+@app.route("/posts/<string>", methods=["GET", "POST"])
 def edit_post(post_name):
     if post_name not in BlogPost.list_blog_posts():
-        abort(404) #TODO: make error page more user-friendly
+        abort(404)  # TODO: make error page more user-friendly
     if request.method == "POST":
         new_title = request.form["title"]
         new_content= request.form["content"]
@@ -40,6 +36,13 @@ def edit_post(post_name):
         return
 
     return render_template("form.html")
+
+
+# Main
+@app.route("/")
+def main():
+    return render_template("index.html", post_names=BlogPost.list_blog_posts())
+
 
 if __name__ == "__main__":
     app.run()
