@@ -1,12 +1,10 @@
-#TODO: Implement stuff here
-# Trying commit
 from flask import Flask
 
 app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return "It works"
+    return "<h1>Blog Post Manager</h1>"
 
 if __name__ == "__main__":
     app.run()
