@@ -23,5 +23,7 @@ def edit_post(post_name):
     if post_name not in list_blog_posts():
         abort(404) #TODO: make error page more user-friendly
 
+
+
 if __name__ == "__main__":
     app.run()
