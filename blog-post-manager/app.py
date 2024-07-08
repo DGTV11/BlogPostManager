@@ -30,6 +30,8 @@ def edit_post(post_name):
     if post_name not in BlogPost.list_blog_posts():
         abort(404)  # TODO: make error page more user-friendly
     if request.method == "POST":
+        request.form['title'] = post_name['title']
+        request.form['content'] = post_name['content']
         new_title = request.form["title"]
         new_content= request.form["content"]
         
