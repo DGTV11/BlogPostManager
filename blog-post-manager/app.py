@@ -35,13 +35,14 @@ def edit_post(post_name):
 
     return render_template("form.html")
 
+
 # Main
-@app.route("/", methods=('GET', 'POST'))
+@app.route("/", methods=("GET", "POST"))
 def main():
-    if request.method == 'POST': #TODO: FIX ME!!!
-        title = escape(request.form['title'].split())
+    if request.method == "POST":  # TODO: FIX ME!!!
+        title = escape(request.form["title"].split())
         if not title:
-            flash('Title is required!')
+            flash("Title is required!")
 
     return render_template("index.html", post_names=BlogPost.list_blog_posts())
 
