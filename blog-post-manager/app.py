@@ -12,7 +12,7 @@ class BlogPost:
 
     @staticmethod
     def list_blog_posts():
-        return glob(os.path.join(os.path.dirname(__file__), "blog-posts", "*", "")
+        return glob(os.path.join(os.path.dirname(__file__), "blog-posts", "*", ""))
 
 @app.route('/info')
 def info():
