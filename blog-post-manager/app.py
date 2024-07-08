@@ -9,6 +9,7 @@ app = Flask(__name__)
 
 class BlogPost:
     def __init__(self):
+        date = self.date
         title = self.title
         content = self.content
 
@@ -33,8 +34,9 @@ def edit_post(post_name):
     if post_name not in BlogPost.list_blog_posts():
         abort(404) #TODO: make error page more user-friendly
     if request.method == "POST":
-        title = request.form["title"]
-        content= request.form["content"]
+        new_title = request.form["title"]
+        new_content= request.form["content"]
+        
         return
 
     return render_template("form.html")
