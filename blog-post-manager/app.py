@@ -1,7 +1,7 @@
 from glob import glob
 import os
 
-from flask import Flask, url_for, request, render_template, abort, url_for
+from flask import Flask, url_for, request, render_template, abort, flash
 
 from markupsafe import escape
 
@@ -24,7 +24,7 @@ def info():
     return render_template("info.html")
 
 
-@app.route("/posts/<string>", methods=["GET", "POST"])
+@app.route("/posts/<string>", methods=("GET", "POST"))
 def edit_post(post_name):
     if post_name not in BlogPost.list_blog_posts():
         abort(404)  # TODO: make error page more user-friendly
@@ -35,10 +35,14 @@ def edit_post(post_name):
 
     return render_template("form.html")
 
-
 # Main
-@app.route("/")
+@app.route("/", methods=('GET', 'POST'))
 def main():
+    if request.method == 'POST': #TODO: FIX ME!!!
+        title = escape(request.form['title'].split())
+        if not title:
+            flash('Title is required!')
+
     return render_template("index.html", post_names=BlogPost.list_blog_posts())
 
 
