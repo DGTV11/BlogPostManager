@@ -36,7 +36,7 @@ def edit_post(post_name):
 # Main
 @app.route('/')
 def main():
-    return render_template("info.html", post_names=BlogPost.list_blog_posts())
+    return render_template("index.html", post_names=BlogPost.list_blog_posts())
 
 if __name__ == "__main__":
     app.run()
