@@ -7,6 +7,7 @@ app = Flask(__name__)
 def info():
     return render_template("templates/app-templates/index.html")
 
+@app.route('/')
 def main():
     return "<h1>Blog Post Manager</h1>"
 
