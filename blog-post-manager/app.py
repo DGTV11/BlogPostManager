@@ -9,7 +9,8 @@ app = Flask(__name__)
 
 class BlogPost:
     def __init__(self):
-        pass
+        title = self.title
+        content = self.content
 
     @staticmethod
     def list_blog_posts():
