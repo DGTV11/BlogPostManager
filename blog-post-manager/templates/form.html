@@ -4,9 +4,9 @@
     <title></title>
   <body>
     <form method="post">
-        Blog title: <input name="title"/>
+        Blog title: <input name="title" value="{{ post_name }}"/>
         <br/><br/>
-        Content: <input name="content"/>
+        Content:  <textarea name="content">{{ get_post_content(post_name) }}</textarea>
         <br/><br/>
         <button type="submit">Submit</button>
     </form>
