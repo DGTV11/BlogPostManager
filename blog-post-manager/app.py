@@ -31,14 +31,6 @@ def info():
 def posts(postname): # go through integration hell later
     if postname not in BlogPost.list_blog_posts():
         abort(404)  # TODO: make error page more user-friendly
-    if request.method == "POST":
-        request.form['title'] = postname['title']
-        request.form['content'] = postname['content']
-        new_title = request.form["title"]
-        new_content= request.form["content"]
-        
-        return
-    print(f"New title: {new_title}, New content: {new_content}")
 
     return render_template("form.html", post_name=postname)
    

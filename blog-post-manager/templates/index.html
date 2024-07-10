@@ -6,8 +6,8 @@
     <h1>Blog Post Manager</h1>
     <h2>Blog Posts</h2>
     {% for post_name in post_names %}
-      <a href="{{url_for('posts', postname=post_name)}}">{{post_name}}</a>
       <form method="post">
+        <a href="{{url_for('posts', postname=post_name)}}">{{post_name}}</a>
         <input type="hidden" name="post_name" value="{{post_name}}" />
         <input type="submit" name="btn" value="Delete post" />
       </form>
