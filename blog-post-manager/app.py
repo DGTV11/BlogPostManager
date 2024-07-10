@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 
 class BlogPost: # the blog post object
-    def __init__(self):
+    def __init__(self, date, title, content):
         date = self.date
         title = self.title
         content = self.content
@@ -37,7 +37,9 @@ def edit_post(post_name):
         
         return
 
-    return render_template("form.html")
+    return render_template("form.html", post_name=post_name)
+    print(f"New title: {new_title}, New content: {new_content}")
+
 
 
 # Main
