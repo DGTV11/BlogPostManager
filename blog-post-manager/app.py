@@ -16,7 +16,9 @@ class BlogPost: # the blog post object
 
     @staticmethod
     def list_blog_posts():
-        return glob(os.path.join(os.path.dirname(__file__), "blog-posts", "*", ""))
+        blog_post_filepaths = glob(os.path.join(os.path.dirname(__file__), "blog-posts", "*", ""))
+        blog_post_name_list = list(map(lambda s: os.path.basename(os.path.split(s)[0]), blog_post_filepaths))
+        return blog_post_name_list
 
 
 # Stuff
@@ -25,19 +27,14 @@ def info():
     return render_template("info.html")
 
 
-@app.route("/posts/<string>", methods=("GET", "POST"))
-def edit_post(post_name):
-    if post_name not in BlogPost.list_blog_posts():
+@app.route("/posts/<postname>", methods=("GET", "POST"))
+def posts(postname): # go through integration hell later
+    if postname not in BlogPost.list_blog_posts():
         abort(404)  # TODO: make error page more user-friendly
     if request.method == "POST":
-        request.form['title'] = post_name['title']
-        request.form['content'] = post_name['content']
-        new_title = request.form["title"]
-        new_content= request.form["content"]
-        
-        return
+        pass
 
-    return render_template("form.html", post_name=post_name)
+    return render_template("form.html", post_name=postname)
     print(f"New title: {new_title}, New content: {new_content}")
 
 
@@ -54,13 +51,13 @@ def main():
     if request.method == "POST":
         match request.form["btn"]:
             case "Create new blog post":
-                title = escape(request.form["title"].strip())
+                title = request.form["title"]
                 if not title:
                     flash("Title is required!")
-                    redirect(url_for('main'))
+                os.mkdir(os.path.join(os.path.dirname(__file__), "blog-posts", title))
             case "Delete post":
                 pass
-    
+                
     return render_template("index.html", post_names=BlogPost.list_blog_posts())
 
 if __name__ == "__main__":
