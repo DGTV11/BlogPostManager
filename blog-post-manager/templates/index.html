@@ -1,5 +1,17 @@
-<h1>Blog Post Manager</h1>
-<h2>Blog Posts</h2>
-{% for post_name in post_names %}
-<a href="{{url_for('posts', post_name)}}">{{post_name}}</a>
-{% endfor %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Blog Post Manager</title>
+  <body>
+    <h1>Blog Post Manager</h1>
+    <h2>Blog Posts</h2>
+    {% for post_name in post_names %}
+      <a href="{{url_for('posts', post_name)}}">{{post_name}}</a>
+    {% endfor %}
+    <form method="post">
+      <label for="title">Post title</label>
+      <input type="text" name="title" value="{{ request.form['title']}}" />
+      <input type="submit" value="Create new blog post" />
+    </form>
+  </body>
+<html>
