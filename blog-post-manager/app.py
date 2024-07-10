@@ -52,6 +52,16 @@ def main():
 
     return render_template("index.html", post_names=BlogPost.list_blog_posts())
 
+from flask import Flask, render_template, Response, request, redirect, url_for
+app = Flask(__name__)
+
+@app.route("/")
+def index():
+    return render_template('index.html');
+
+def move_forward():
+    #Moving forward code
+    print("Moving Forward...")
 
 if __name__ == "__main__":
     app.run()
