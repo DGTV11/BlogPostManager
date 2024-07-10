@@ -262,3 +262,4 @@ pyrightconfig.json
 # End of https://www.toptal.com/developers/gitignore/api/python,flask
 
 blog-post-manager/blog-posts/*
+!blog-post-manager/blog-posts/.gitkeep
