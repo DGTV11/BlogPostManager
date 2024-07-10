@@ -5,7 +5,21 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
     <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script> 
   </head>
+
   <body>
+    <label for="font-color">Font Color:</label>
+    <input type="color" id="font-color" name="font-color">
+
+    <label for="font-family">Font Family:</label>
+    <select id="font-family" name="font-family">
+    <option value="Arial">Arial</option>
+    <option value="Verdana">Verdana</option>
+    <option value="Courier">Courier</option>
+    </select>
+
+  <label for="font-size">Font Size:</label>
+  <input type="range" id="font-size" name="font-size" min="10" max="100" value="16">
+
     <form method="post">
         Blog title: <input name="title" value="{{ post_name }}"/>
         <br/><br/>
@@ -16,7 +30,19 @@
     
   </body>
 <script>
+  document.getElementById("font-color").addEventListener("input", function() {
+  document.getElementById("preview").style.color = this.value;
+  });
+  
+  document.getElementById("font-family").addEventListener("change", function() {
+  document.getElementById("preview").style.fontFamily = this.value;
+  });
+  
+  document.getElementById("font-size").addEventListener("input", function() {
+  document.getElementById("preview").style.fontSize = this.value + "px";
+  });
     var simplemde = new SimpleMDE({ element: document.getElementById("content") });
 </script>
+
 
 </html>
