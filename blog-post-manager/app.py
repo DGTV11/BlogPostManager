@@ -36,10 +36,10 @@ def edit_post(post_name):
         new_content= request.form["content"]
         
         return
-
-    return render_template("form.html", post_name=post_name)
     print(f"New title: {new_title}, New content: {new_content}")
 
+    return render_template("form.html", post_name=post_name)
+   
 
 
 # Main
