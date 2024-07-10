@@ -8,7 +8,8 @@
     {% for post_name in post_names %}
       <a href="{{url_for('posts', postname=post_name)}}">{{post_name}}</a>
       <form method="post">
-        <input type="submit" name="btn" value="Delete post">
+        <input type="hidden" name="post_name" value="{{post_name}}" />
+        <input type="submit" name="btn" value="Delete post" />
       </form>
     {% endfor %}
     <form method="post">

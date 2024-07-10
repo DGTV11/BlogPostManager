@@ -37,15 +37,6 @@ def posts(postname): # go through integration hell later
     return render_template("form.html", post_name=postname)
     print(f"New title: {new_title}, New content: {new_content}")
 
-
-
-# Main
-from flask import Flask, render_template, request, flash, redirect, url_for
-from markupsafe import escape
-
-app = Flask(__name__)
-app.secret_key = 'your_secret_key'
-
 @app.route("/", methods=("GET", "POST"))
 def main():
     if request.method == "POST":
@@ -56,7 +47,8 @@ def main():
                     flash("Title is required!")
                 os.mkdir(os.path.join(os.path.dirname(__file__), "blog-posts", title))
             case "Delete post":
-                pass
+                post_name = request.form["post_name"]
+                os.rmdir(os.path.join(os.path.dirname(__file__), "blog-posts", post_name))
                 
     return render_template("index.html", post_names=BlogPost.list_blog_posts())
 
