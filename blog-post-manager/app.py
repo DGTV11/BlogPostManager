@@ -43,25 +43,25 @@ def edit_post(post_name):
 
 
 # Main
+from flask import Flask, render_template, request, flash, redirect, url_for
+from markupsafe import escape
+
+app = Flask(__name__)
+app.secret_key = 'your_secret_key'
+
 @app.route("/", methods=("GET", "POST"))
 def main():
-    if request.method == "POST":  # TODO: FIX ME!!!
-        title = escape(request.form["title"].split())
-        if not title:
-            flash("Title is required!")
-
+    if request.method == "POST":
+        match request.form["btn"]:
+            case "Create new blog post":
+                title = escape(request.form["title"].strip())
+                if not title:
+                    flash("Title is required!")
+                    redirect(url_for('main'))
+            case "Delete post":
+                pass
+    
     return render_template("index.html", post_names=BlogPost.list_blog_posts())
-
-from flask import Flask, render_template, Response, request, redirect, url_for
-app = Flask(__name__)
-
-@app.route("/")
-def index():
-    return render_template('index.html');
-
-def move_forward():
-    #Moving forward code
-    print("Moving Forward...")
 
 if __name__ == "__main__":
     app.run()
