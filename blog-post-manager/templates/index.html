@@ -6,7 +6,7 @@
     <h1>Blog Post Manager</h1>
     <h2>Blog Posts</h2>
     {% for post_name in post_names %}
-      <a href="{{url_for('posts', post_name)}}">{{post_name}}</a>
+      <a href="{{url_for('posts', postname=post_name)}}">{{post_name}}</a>
     {% endfor %}
     <form method="post">
       <label for="title">Post title</label>
