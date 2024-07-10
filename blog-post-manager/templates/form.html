@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title></title>
+    <title>Blog Post Manager</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script> 
+  </head>
   <body>
     <form method="post">
         Blog title: <input name="title" value="{{ post_name }}"/>
         <br/><br/>
-        Content:  <textarea name="content">{{ get_post_content(post_name) }}</textarea>
+        Content:  <textarea id="content" name="content">{{ get_post_content(post_name) }}</textarea>
         <br/><br/>
         <button type="submit">Submit</button>
     </form>
     
   </body>
+<script>
+    var simplemde = new SimpleMDE({ element: document.getElementById("content") });
+</script>
 
-<html>
+</html>
