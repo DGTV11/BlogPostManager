@@ -8,7 +8,7 @@ from markupsafe import escape
 app = Flask(__name__)
 
 
-class BlogPost:
+class BlogPost: # the blog post object
     def __init__(self):
         date = self.date
         title = self.title
