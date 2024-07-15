@@ -66,25 +66,9 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
 
             case "Back to menu":
                 pass
-        print(request.form["btn"])
 
     with open(os.path.join(blog_post_folder_path, "content.md"), "r") as f:
         postcontent = f.read()
-    
-    # initialise styles.css (create it in same directory as config.ini and content.md) with DEFAULT styles, add persistence to BASIC style editor (convert GUI stuffs to css file also plz add `system-ui` font and support for google fonts)
-    with open(os.path.join(blog_post_folder_path, "styles.css"), 'w+') as f:
-        font_color = request.cookies.get('font-color') or '#000000'
-        font_family = request.cookies.get('font-family') or 'Arial'
-        font_size = request.cookies.get('font-size') or '16px'
-        css = f"""
-            #preview {{
-            color: {font_color};
-            font-family: {font_family};
-            font-size: {font_size};                   
-        }}
-        """
-
-        f.write(css)
 
     config = configparser.ConfigParser()
     config.read(os.path.join(os.path.dirname(__file__), "blog-posts", postid, "config.ini"))
@@ -126,6 +110,13 @@ def main():
 
                 with open(os.path.join(blog_post_folder_path, "content.md"), 'w+') as f:
                     f.write('## Hello, world!')
+
+                # initialise basic-styles.ini (create it in same directory as config.ini and content.md) with DEFAULT styles, add persistence to BASIC style editor (convert GUI stuffs to css file also plz add `system-ui` font and support for google fonts)
+                with open(os.path.join(blog_post_folder_path, "basic-styles.ini"), 'w') as f:
+                    config = configparser.ConfigParser()
+                    config['STYLES'] = {'font_color': '#000000', 'font-family': 'system-ui', 'font-size': "16"}
+                    config.write(f)
+
             case "Delete post": # DELETES POST
                 post_id = request.form["pst_id"]
                 shutil.rmtree(
