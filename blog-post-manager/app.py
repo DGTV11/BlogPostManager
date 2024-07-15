@@ -66,7 +66,6 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
 
             case "Back to menu":
                 pass
-        print(request.form["btn"])
 
     with open(os.path.join(blog_post_folder_path, "content.md"), "r") as f:
         postcontent = f.read()
