@@ -1,5 +1,5 @@
 from glob import glob
-import os, configparser, shutil
+import os, configparser, shutil, markdown
 
 from flask import Flask, url_for, request, render_template, abort, flash
 
@@ -45,7 +45,7 @@ def main():
         match request.form["btn"]:
             case "Create new blog post":
                 title = request.form["title"]
-                if not title:
+                if title == "":
                     flash("Title is required!")
 
                 blog_post_folder_path = os.path.join(os.path.dirname(__file__), "blog-posts", title)
