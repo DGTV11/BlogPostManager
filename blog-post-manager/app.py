@@ -32,14 +32,30 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
     if postid not in BlogPostHelpers.list_blog_post_ids():
         abort(404)  # TODO: make error page more user-friendly
 
-    if request.method == "POST":
-        if request.form["title"] != None:
-            pass
-
     blog_post_folder_path = os.path.join(os.path.dirname(__file__), "blog-posts", postid)
+
+    if request.method == "POST":
+        match request.form["btn"]:
+            case "Save":
+                with open(os.path.join(blog_post_folder_path, "config.ini"), 'w+') as f:
+                    config = configparser.ConfigParser()
+                    
+                    config.read(os.path.join(blog_post_folder_path, "config.ini"))
+                    isAdvancedMode = config['EDITOR']['isAdvancedMode']
+
+                    config['NAME'] = {'post_name': request.form['title']}
+                    config['EDITOR'] = {'isAdvancedMode': isAdvancedMode}
+                    config.write(f)
+
+                with open(os.path.join(blog_post_folder_path, "content.md"), 'w') as f:
+                    f.write(request.form['content'])
+            case "Back to menu":
+                pass
+
     with open(os.path.join(blog_post_folder_path, "content.md"), "r") as f:
         postcontent = f.read()
-                    # initialise styles.css (create it in same directory as config.ini and content.md) with DEFAULT styles, add persistence to BASIC style editor (convert GUI stuffs to css file also plz add `system-ui` font and support for google fonts)
+    
+    # initialise styles.css (create it in same directory as config.ini and content.md) with DEFAULT styles, add persistence to BASIC style editor (convert GUI stuffs to css file also plz add `system-ui` font and support for google fonts)
     with open(os.path.join(blog_post_folder_path, "styles.css"), 'w+') as f:
         font_color = request.cookies.get('font-color') or '#000000'
         font_family = request.cookies.get('font-family') or 'Arial'
