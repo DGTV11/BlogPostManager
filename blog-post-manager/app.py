@@ -37,7 +37,7 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
     if request.method == "POST":
         match request.form["btn"]:
             case "Save":
-                config = configparser.ConfigParser()
+                config = configparser.ConfigParser() # a interface with the config files
                 config.read(os.path.join(blog_post_folder_path, "config.ini"))
                 isAdvancedMode = config['EDITOR']['isAdvancedMode']
 
@@ -50,10 +50,10 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
                 with open(os.path.join(blog_post_folder_path, "content.md"), 'w') as f:
                     f.write(request.form['content'])
                     
-                with open(os.path.join(blog_post_folder_path, "styles.css"), 'w+') as f:
-                    font_color = request.form('font-color') or '#000000'
-                    font_family = request.form('font-family') or 'Arial'
-                    font_size = request.form('font-size') or '16px'
+                with open(os.path.join(blog_post_folder_path, "basic-styles.ini"), 'w+') as f:
+                    font_color = request.form['font-color'] or '#000000'
+                    font_family = request.form['font-family'] or 'Arial'
+                    font_size = request.form['font-size'] or '16px'
                     css = f"""
                     #preview {{
                     color: {font_color};
