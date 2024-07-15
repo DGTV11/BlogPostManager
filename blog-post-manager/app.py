@@ -2,7 +2,7 @@ from glob import glob
 from uuid import uuid4
 import os, configparser, shutil, markdown
 
-from flask import Flask, url_for, redirect, request, render_template, abort, flash
+from flask import Flask, url_for, request, render_template, abort, flash
 
 from markupsafe import escape
 
@@ -35,10 +35,23 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
     blog_post_folder_path = os.path.join(os.path.dirname(__file__), "blog-posts", postid)
 
     if request.method == "POST":
-        if request.form["title"] != None:
-            pass
+        match request.form["btn"]:
+            case "Save":
+                with open(os.path.join(blog_post_folder_path, "config.ini"), 'w+') as f:
+                    config = configparser.ConfigParser()
+                    
+                    config.read(os.path.join(blog_post_folder_path, "config.ini"))
+                    isAdvancedMode = config['EDITOR']['isAdvancedMode']
 
-    blog_post_folder_path = os.path.join(os.path.dirname(__file__), "blog-posts", postid)
+                    config['NAME'] = {'post_name': request.form['title']}
+                    config['EDITOR'] = {'isAdvancedMode': isAdvancedMode}
+                    config.write(f)
+
+                with open(os.path.join(blog_post_folder_path, "content.md"), 'w') as f:
+                    f.write(request.form['content'])
+            case "Back to menu":
+                pass
+
     with open(os.path.join(blog_post_folder_path, "content.md"), "r") as f:
         postcontent = f.read()
     
@@ -56,7 +69,6 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
         """
 
         f.write(css)
-    
 
     config = configparser.ConfigParser()
     config.read(os.path.join(os.path.dirname(__file__), "blog-posts", postid, "config.ini"))
