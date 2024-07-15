@@ -46,7 +46,7 @@ def main():
         match request.form["btn"]:
             case "Create new blog post":
                 title = request.form["title"]
-                if not title:
+                if title == "":
                     flash("Title is required!")
                 os.mkdir(os.path.join(os.path.dirname(__file__), "blog-posts", title))
             case "Delete post":
