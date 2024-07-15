@@ -57,6 +57,9 @@ def main():
                     config.write(f)
                 with open(os.path.join(blog_post_folder_path, "content.md"), 'w+') as f:
                     f.write('## Hello, world!')
+                # initialise styles.css (create it in same directory as config.ini and content.md) with DEFAULT styles, add persistence to BASIC style editor (convert GUI stuffs to css file also plz add `system-ui` font and support for google fonts)
+                with open(os.path.join(blog_post_folder_path, "styles.css"), 'w+') as f:
+                    f.write()
             case "Delete post":
                 post_name = request.form["post_name"]
                 shutil.rmtree(
