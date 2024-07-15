@@ -27,7 +27,7 @@
         Content: <textarea id="content" name="content">{{ post_content }}</textarea>
         <br/><br/>
         <input name="btn" type="submit" value="Save" />
-        <input name="btn" type="submit" value="Back to menu" onclick="window.location.href='/'"/>
+        <button><a href="/" style="text-decoration: none;color: black;">BACK TO MENU</a></button>
     </form>
     
   </body>
@@ -44,6 +44,9 @@
   document.getElementById("preview").style.fontSize = this.value + "px";
   });
     var simplemde = new SimpleMDE({ element: document.getElementById("content") });
+  function myfunc(){
+    window.location.href = "http://www.w3schools.com";
+  }
 </script>
 
 
