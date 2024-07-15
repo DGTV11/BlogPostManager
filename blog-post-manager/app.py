@@ -39,6 +39,20 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
     blog_post_folder_path = os.path.join(os.path.dirname(__file__), "blog-posts", postid)
     with open(os.path.join(blog_post_folder_path, "content.md"), "r") as f:
         postcontent = f.read()
+                    # initialise styles.css (create it in same directory as config.ini and content.md) with DEFAULT styles, add persistence to BASIC style editor (convert GUI stuffs to css file also plz add `system-ui` font and support for google fonts)
+    with open(os.path.join(blog_post_folder_path, "styles.css"), 'w+') as f:
+        font_color = request.cookies.get('font-color') or '#000000'
+        font_family = request.cookies.get('font-family') or 'Arial'
+        font_size = request.cookies.get('font-size') or '16px'
+        css = f"""
+            #preview {{
+            color: {font_color};
+            font-family: {font_family};
+            font-size: {font_size};                   
+        }}
+        """
+
+        f.write(css)
 
     config = configparser.ConfigParser()
     config.read(os.path.join(os.path.dirname(__file__), "blog-posts", postid, "config.ini"))
@@ -58,7 +72,7 @@ def get_bp_names_from_bp_ids(ids):
 # Main
 @app.route("/", methods=("GET", "POST"))
 def main():
-    if request.method == "POST":
+    if request.method == "POST": # CREATES NEW POST
         match request.form["btn"]:
             case "Create new blog post":
                 title = request.form["title"]
@@ -80,7 +94,7 @@ def main():
 
                 with open(os.path.join(blog_post_folder_path, "content.md"), 'w+') as f:
                     f.write('## Hello, world!')
-            case "Delete post":
+            case "Delete post": # DELETES POST
                 post_id = request.form["pst_id"]
                 shutil.rmtree(
                     os.path.join(os.path.dirname(__file__), "blog-posts", post_id)
