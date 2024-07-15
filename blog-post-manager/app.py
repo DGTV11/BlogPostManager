@@ -2,7 +2,7 @@ from glob import glob
 from uuid import uuid4
 import os, configparser, shutil, markdown
 
-from flask import Flask, url_for, request, render_template, abort, flash
+from flask import Flask, url_for, redirect, request, render_template, abort, flash
 
 from markupsafe import escape
 
@@ -35,6 +35,7 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
     if request.method == "POST":
         if request.form["title"] != None:
             pass
+                
 
     blog_post_folder_path = os.path.join(os.path.dirname(__file__), "blog-posts", postid)
     with open(os.path.join(blog_post_folder_path, "content.md"), "r") as f:
@@ -53,6 +54,7 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
         """
 
         f.write(css)
+    
 
     config = configparser.ConfigParser()
     config.read(os.path.join(os.path.dirname(__file__), "blog-posts", postid, "config.ini"))
