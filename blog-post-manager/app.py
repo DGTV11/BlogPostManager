@@ -1,5 +1,5 @@
 from glob import glob
-import os
+import os, configparser, shutil
 
 from flask import Flask, url_for, request, render_template, abort, flash
 
@@ -36,7 +36,11 @@ def posts(postname):  # check GH Project for TODO list (to fix this)
     if postname not in BlogPost.list_blog_posts():
         abort(404)  # TODO: make error page more user-friendly
 
-    return render_template("form.html", post_name=postname)
+    blog_post_folder_path = os.path.join(os.path.dirname(__file__), "blog-posts", postname)
+    with open(os.path.join(blog_post_folder_path, "content.md"), "r") as f:
+        postcontent = f.read()
+
+    return render_template("form.html", post_name=postname, post_content=postcontent)
 
 
 # Main
@@ -48,10 +52,19 @@ def main():
                 title = request.form["title"]
                 if not title:
                     flash("Title is required!")
-                os.mkdir(os.path.join(os.path.dirname(__file__), "blog-posts", title))
+
+                blog_post_folder_path = os.path.join(os.path.dirname(__file__), "blog-posts", title)
+                os.mkdir(blog_post_folder_path)
+
+                with open(os.path.join(blog_post_folder_path, "config.ini"), 'w') as f:
+                    config = configparser.ConfigParser()
+                    config['EDITOR'] = {'isAdvancedMode': False}
+                    config.write(f)
+                with open(os.path.join(blog_post_folder_path, "content.md"), 'w+') as f:
+                    f.write('## Hello, world!')
             case "Delete post":
                 post_name = request.form["post_name"]
-                os.rmdir(
+                shutil.rmtree(
                     os.path.join(os.path.dirname(__file__), "blog-posts", post_name)
                 )
 
