@@ -5,10 +5,10 @@
   <body>
     <h1>Blog Post Manager</h1>
     <h2>Blog Posts</h2>
-    {% for post_name in post_names %}
+    {% for pst_id, pst_name in post_ids_n_names.items() %}
       <form method="post">
-        <a href="{{url_for('posts', postname=post_name)}}">{{post_name}}</a>
-        <input type="hidden" name="post_name" value="{{post_name}}" />
+        <a href="{{url_for('posts', postid=pst_id)}}">{{pst_name}}</a>
+        <input type="hidden" name="pst_id" value="{{pst_id}}" />
         <input type="submit" name="btn" value="Delete post" />
       </form>
     {% endfor %}

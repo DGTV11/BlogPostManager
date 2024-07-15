@@ -1,4 +1,5 @@
 from glob import glob
+from uuid import uuid4
 import os, configparser, shutil, markdown
 
 from flask import Flask, url_for, request, render_template, abort, flash
@@ -10,14 +11,14 @@ app = Flask(__name__)
 
 class BlogPostHelpers:
     @staticmethod
-    def list_blog_posts():
+    def list_blog_post_ids():
         blog_post_filepaths = glob(
             os.path.join(os.path.dirname(__file__), "blog-posts", "*", "")
         )
-        blog_post_name_list = list(
+        blog_post_id_list = list(
             map(lambda s: os.path.basename(os.path.split(s)[0]), blog_post_filepaths)
         )
-        return blog_post_name_list
+        return blog_post_id_list
 
 
 # Stuff
@@ -26,17 +27,33 @@ def info():
     return render_template("info.html")
 
 
-@app.route("/posts/<postname>", methods=("GET", "POST"))
-def posts(postname):  # check GH Project for TODO list (to fix this)
-    if postname not in BlogPostHelpers.list_blog_posts():
+@app.route("/posts/<postid>", methods=("GET", "POST"))
+def posts(postid):  # check GH Project for TODO list (to fix this)
+    if postid not in BlogPostHelpers.list_blog_post_ids():
         abort(404)  # TODO: make error page more user-friendly
 
-    blog_post_folder_path = os.path.join(os.path.dirname(__file__), "blog-posts", postname)
+    if request.method == "POST":
+        if request.form["title"] != None:
+            pass
+
+    blog_post_folder_path = os.path.join(os.path.dirname(__file__), "blog-posts", postid)
     with open(os.path.join(blog_post_folder_path, "content.md"), "r") as f:
         postcontent = f.read()
 
+    config = configparser.ConfigParser()
+    config.read(os.path.join(os.path.dirname(__file__), "blog-posts", postid, "config.ini"))
+    postname = config['NAME']['post_name']
+
     return render_template("editor.html", post_name=postname, post_content=postcontent)
 
+def get_bp_names_from_bp_ids(ids):
+    bp_names = []
+    for id in ids:
+        config = configparser.ConfigParser()
+        config.read(os.path.join(os.path.dirname(__file__), "blog-posts", id, "config.ini"))
+        bp_names.append(config['NAME']['post_name'])
+
+    return bp_names
 
 # Main
 @app.route("/", methods=("GET", "POST"))
@@ -48,22 +65,29 @@ def main():
                 if title == "":
                     flash("Title is required!")
 
-                blog_post_folder_path = os.path.join(os.path.dirname(__file__), "blog-posts", title)
+                post_id = f"{uuid4().hex}0{uuid4().hex}"
+                while post_id not in BlogPostHelpers.list_blog_post_ids():
+                    post_id = f"{uuid4().hex}0{uuid4().hex}"
+
+                blog_post_folder_path = os.path.join(os.path.dirname(__file__), "blog-posts", post_id)
                 os.mkdir(blog_post_folder_path)
 
                 with open(os.path.join(blog_post_folder_path, "config.ini"), 'w') as f:
                     config = configparser.ConfigParser()
+                    config['NAME'] = {'post_name': title}
                     config['EDITOR'] = {'isAdvancedMode': False}
                     config.write(f)
+
                 with open(os.path.join(blog_post_folder_path, "content.md"), 'w+') as f:
                     f.write('## Hello, world!')
             case "Delete post":
-                post_name = request.form["post_name"]
+                post_id = request.form["pst_id"]
                 shutil.rmtree(
-                    os.path.join(os.path.dirname(__file__), "blog-posts", post_name)
+                    os.path.join(os.path.dirname(__file__), "blog-posts", post_id)
                 )
 
-    return render_template("index.html", post_names=BlogPostHelpers.list_blog_posts())
+    all_blog_post_ids = BlogPostHelpers.list_blog_post_ids()
+    return render_template("index.html", post_ids_n_names={id: name for id, name in zip(all_blog_post_ids, get_bp_names_from_bp_ids(all_blog_post_ids))})
 
 
 if __name__ == "__main__":
