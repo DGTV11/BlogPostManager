@@ -37,12 +37,12 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
     if request.method == "POST":
         match request.form["btn"]:
             case "Save":
+                config = configparser.ConfigParser()
+                config.read(os.path.join(blog_post_folder_path, "config.ini"))
+                isAdvancedMode = config['EDITOR']['isAdvancedMode']
+
                 with open(os.path.join(blog_post_folder_path, "config.ini"), 'w+') as f:
                     config = configparser.ConfigParser()
-                    
-                    config.read(os.path.join(blog_post_folder_path, "config.ini"))
-                    isAdvancedMode = config['EDITOR']['isAdvancedMode']
-
                     config['NAME'] = {'post_name': request.form['title']}
                     config['EDITOR'] = {'isAdvancedMode': isAdvancedMode}
                     config.write(f)
@@ -51,6 +51,7 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
                     f.write(request.form['content'])
             case "Back to menu":
                 pass
+        print(request.form["btn"])
 
     with open(os.path.join(blog_post_folder_path, "content.md"), "r") as f:
         postcontent = f.read()
