@@ -55,7 +55,6 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
 
     with open(os.path.join(blog_post_folder_path, "content.md"), "r") as f:
         postcontent = f.read()
-    
 
     config = configparser.ConfigParser()
     config.read(os.path.join(os.path.dirname(__file__), "blog-posts", postid, "config.ini"))
@@ -98,7 +97,7 @@ def main():
                 with open(os.path.join(blog_post_folder_path, "content.md"), 'w+') as f:
                     f.write('## Hello, world!')
 
-                # initialise styles.css (create it in same directory as config.ini and content.md) with DEFAULT styles, add persistence to BASIC style editor (convert GUI stuffs to css file also plz add `system-ui` font and support for google fonts)
+                # initialise basic-styles.ini (create it in same directory as config.ini and content.md) with DEFAULT styles, add persistence to BASIC style editor (convert GUI stuffs to css file also plz add `system-ui` font and support for google fonts)
                 with open(os.path.join(blog_post_folder_path, "basic-styles.ini"), 'w') as f:
                     config = configparser.ConfigParser()
                     config['STYLES'] = {'font_color': '#000000', 'font-family': 'system-ui', 'font-size': "16"}
