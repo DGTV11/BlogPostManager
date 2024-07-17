@@ -42,7 +42,7 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
 
         match request.form["btn"]:
             case "Save":
-                config = configparser.ConfigParser()
+                config = configparser.ConfigParser() # a interface with the config files
                 config.read(os.path.join(blog_post_folder_path, "config.ini"))
                 isAdvancedMode = config['EDITOR']['isAdvancedMode']
 
@@ -59,6 +59,27 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
                     config = configparser.ConfigParser()
                     config['STYLES'] = {'font_color': font_color, 'font': font, 'font_size': font_size}
                     config.write(f)
+            case "Switch to advanced mode:":
+                config = configparser.ConfigParser() # a interface with the config files
+                config.read(os.path.join(blog_post_folder_path, "config.ini"))                
+                isAdvancedMode = config['EDITOR']['isAdvancedMode']
+                if isAdvancedMode:
+                    with open(os.path.join(blog_post_folder_path, "content.md"), 'r') as f:
+                        md_data = f.read(request.form['content'])
+                    html_data = markdown.markdown(md_data)
+                    with open(os.path.join(blog_post_folder_path, "content.md"), 'w') as f:
+                        f.write(html_data)
+                else:
+                    pass
+            case "Switch to basic mode:":
+                config = configparser.ConfigParser() # a interface with the config files
+                config.read(os.path.join(blog_post_folder_path, "config.ini"))                
+                isAdvancedMode = config['EDITOR']['isAdvancedMode']
+                if isAdvancedMode == False:
+                  pass
+                else:
+                    with open(os.path.join(blog_post_folder_path, "content.md"), 'w') as f:
+                        f.write(request.form['content'])
     else:
         config = configparser.ConfigParser()
         config.read(os.path.join(blog_post_folder_path, "basic-styles.ini"))
