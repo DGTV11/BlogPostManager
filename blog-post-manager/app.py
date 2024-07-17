@@ -58,8 +58,6 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
                     config = configparser.ConfigParser()
                     config['STYLES'] = {'font_color': font_color, 'font': font}
                     config.write(f)
-            case "Update styles":
-                pass
             case "Switch to advanced mode:":
                 config = configparser.ConfigParser()
                 config.read(os.path.join(blog_post_folder_path, "config.ini"))                
