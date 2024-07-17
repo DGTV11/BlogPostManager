@@ -57,9 +57,15 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
             case "Update styles":
                 pass
             case "Switch to advanced mode:":
-                pass
-            case "Swift to basic mode:":
-                pass
+                isAdvancedMode = config['EDITOR']['isAdvancedMode']
+                if isAdvancedMode:
+                  pass
+                else:
+                    pass
+            case "Switch to basic mode:":
+                isAdvancedMode = config['EDITOR']['isAdvancedMode']
+                if isAdvancedMode == False:
+                  pass
 
     with open(os.path.join(blog_post_folder_path, "content.md"), "r") as f:
         postcontent = f.read()
