@@ -34,7 +34,12 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
 
     blog_post_folder_path = os.path.join(os.path.dirname(__file__), "blog-posts", postid)
 
+
     if request.method == "POST":
+        font_color = request.form['font-color']
+        font = request.form['font']
+        font_size = request.form['font-size']
+
         match request.form["btn"]:
             case "Save":
                 config = configparser.ConfigParser()
@@ -52,10 +57,14 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
 
                 with open(os.path.join(blog_post_folder_path, "basic-styles.ini"), 'w') as f:
                     config = configparser.ConfigParser()
-                    config['STYLES'] = {'font_color': request.form['font-color'], 'font-family': request.form['font-family'], 'font-size': request.form['font-size']}
+                    config['STYLES'] = {'font_color': font_color, 'font': font, 'font_size': font_size}
                     config.write(f)
-            case "Update styles":
-                pass
+    else:
+        config = configparser.ConfigParser()
+        config.read(os.path.join(blog_post_folder_path, "basic-styles.ini"))
+        font_color = config['STYLES']['font_color']
+        font = config['STYLES']['font']
+        font_size = config['STYLES']['font_size']
 
     with open(os.path.join(blog_post_folder_path, "content.md"), "r") as f:
         postcontent = f.read()
@@ -64,7 +73,7 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
     config.read(os.path.join(os.path.dirname(__file__), "blog-posts", postid, "config.ini"))
     postname = config['NAME']['post_name']
 
-    return render_template("editor.html", post_name=postname, post_content=postcontent)
+    return render_template("editor.html", post_name=postname, post_content=postcontent, font_color=font_color, font_fonty_font_font=font, font_size=font_size)
 
 def get_bp_names_from_bp_ids(ids):
     bp_names = []
@@ -104,7 +113,7 @@ def main():
                 # initialise basic-styles.ini (create it in same directory as config.ini and content.md) with DEFAULT styles, add persistence to BASIC style editor (convert GUI stuffs to css file also plz add `system-ui` font and support for google fonts)
                 with open(os.path.join(blog_post_folder_path, "basic-styles.ini"), 'w') as f:
                     config = configparser.ConfigParser()
-                    config['STYLES'] = {'font_color': '#000000', 'font-family': 'system-ui', 'font-size': "16"}
+                    config['STYLES'] = {'font_color': '#000000', 'font': 'system-ui', 'font_size': "16"}
                     config.write(f)
 
             case "Delete post": # DELETES POST

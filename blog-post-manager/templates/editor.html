@@ -12,20 +12,38 @@
       <br><br>
 
       <label for="font-color">Font Color:</label>
-      <input type="color" id="font-color" name="font-color">
+      <input type="color" id="font-color" name="font-color" value="{{ font_color }}">
 
-      <label for="font-family">Font Family:</label>
-      <select id="font-family" name="font-family">
-        <option value="Arial">Arial</option>
-        <option value="Verdana">Verdana</option>
-        <option value="Courier">Courier</option>
-        <option value="system-ui">system-ui</option>
+      <label for="font">Font:</label>
+      <select id="font" name="font">
+        {% if font_fonty_font_font == "system-ui" %}
+          <option value="system-ui" selected>system-ui</option>
+        {% else %}
+          <option value="system-ui">system-ui</option>
+        {% endif %}
+
+        {% if font_fonty_font_font == "Arial" %}
+          <option value="Arial" selected>Arial</option>
+        {% else %}
+          <option value="Arial">Arial</option>
+        {% endif %}
+
+        {% if font_fonty_font_font == "Verdana" %}
+          <option value="Verdana" selected>Verdana</option>
+        {% else %}
+          <option value="Verdana">Verdana</option>
+        {% endif %}
+
+        {% if font_fonty_font_font == "Courier" %}
+          <option value="Courier" selected>Courier</option>
+        {% else %}
+          <option value="Courier">Courier</option>
+        {% endif %}
       </select>
 
       <label for="font-size">Font Size:</label>
-      <input type="range" id="font-size" name="font-size" min="10" max="100" value="16">
+      <input type="range" id="font-size" name="font-size" min="10" max="100" value="{{ font_size }}">
 
-      <input name="btn" type="submit" value="Update styles" />
       <br><br>
 
       <textarea id="content" name="content">{{ post_content }}</textarea>
@@ -36,24 +54,16 @@
   </body>
 
   <style>
-    {{ style_contents }}
+    .editor-preview,
+      .editor-preview-side {
+        color: {{ font_color }};
+        font-family: {{ font_fonty_font_font }}, system-ui;
+        font-size: {{ font_size }};
+      }
+    }
   </style>
 <script>
-  document.getElementById("font-color").addEventListener("input", function() {
-  document.getElementById("preview").style.color = this.value;
-  });
-  
-  document.getElementById("font-family").addEventListener("change", function() {
-  document.getElementById("preview").style.fontFamily = this.value;
-  });
-  
-  document.getElementById("font-size").addEventListener("input", function() {
-  document.getElementById("preview").style.fontSize = this.value + "px";
-  });
-    var simplemde = new SimpleMDE({ element: document.getElementById("content") });
-  function myfunc(){
-    window.location.href = "http://www.w3schools.com";
-  }
+  var simplemde = new SimpleMDE({ element: document.getElementById("content") });
 </script>
 
 
