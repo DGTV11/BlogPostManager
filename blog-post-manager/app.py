@@ -61,7 +61,11 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
                 config.read(os.path.join(blog_post_folder_path, "config.ini"))                
                 isAdvancedMode = config['EDITOR']['isAdvancedMode']
                 if isAdvancedMode:
-                  pass
+                    with open(os.path.join(blog_post_folder_path, "content.md"), 'r') as f:
+                        md_data = f.read(request.form['content'])
+                    html_data = markdown.markdown(md_data)
+                    with open(os.path.join(blog_post_folder_path, "content.md"), 'w') as f:
+                        f.write(html_data)
                 else:
                     pass
             case "Switch to basic mode:":
@@ -70,6 +74,9 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
                 isAdvancedMode = config['EDITOR']['isAdvancedMode']
                 if isAdvancedMode == False:
                   pass
+                else:
+                    with open(os.path.join(blog_post_folder_path, "content.md"), 'w') as f:
+                        f.write(request.form['content'])
 
     with open(os.path.join(blog_post_folder_path, "content.md"), "r") as f:
         postcontent = f.read()
