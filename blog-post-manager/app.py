@@ -35,7 +35,6 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
 
     blog_post_folder_path = os.path.join(os.path.dirname(__file__), "blog-posts", postid)
 
-
     if request.method == "POST":
         font_color = request.form['font-color']
         font = request.form['font']
@@ -59,6 +58,8 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
                     config = configparser.ConfigParser()
                     config['STYLES'] = {'font_color': font_color, 'font': font}
                     config.write(f)
+            case "Update styles":
+                pass
             case "Switch to advanced mode:":
                 config = configparser.ConfigParser()
                 config.read(os.path.join(blog_post_folder_path, "config.ini"))                
