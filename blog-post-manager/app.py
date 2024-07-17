@@ -57,12 +57,16 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
             case "Update styles":
                 pass
             case "Switch to advanced mode:":
+                config = configparser.ConfigParser() # a interface with the config files
+                config.read(os.path.join(blog_post_folder_path, "config.ini"))                
                 isAdvancedMode = config['EDITOR']['isAdvancedMode']
                 if isAdvancedMode:
                   pass
                 else:
                     pass
             case "Switch to basic mode:":
+                config = configparser.ConfigParser() # a interface with the config files
+                config.read(os.path.join(blog_post_folder_path, "config.ini"))                
                 isAdvancedMode = config['EDITOR']['isAdvancedMode']
                 if isAdvancedMode == False:
                   pass
