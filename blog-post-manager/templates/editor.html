@@ -7,7 +7,6 @@
   </head>
 
   <body>
-    
     <form method="post">
       Blog title: <input name="title" value="{{ post_name }}" />
       <br><br>
@@ -20,11 +19,13 @@
         <option value="Arial">Arial</option>
         <option value="Verdana">Verdana</option>
         <option value="Courier">Courier</option>
-        <option value="system-ui">System-ui</option>
+        <option value="system-ui">system-ui</option>
       </select>
 
       <label for="font-size">Font Size:</label>
       <input type="range" id="font-size" name="font-size" min="10" max="100" value="16">
+
+      <input name="btn" type="submit" value="Update styles" />
       <br><br>
 
       <textarea id="content" name="content">{{ post_content }}</textarea>
@@ -32,9 +33,11 @@
       <input name="btn" type="submit" value="Save" />
       <button><a href="/" style="text-decoration: none;color: black;">Back to menu</a></button>
     </form>
-
-    
   </body>
+
+  <style>
+    {{ style_contents }}
+  </style>
 <script>
   document.getElementById("font-color").addEventListener("input", function() {
   document.getElementById("preview").style.color = this.value;
