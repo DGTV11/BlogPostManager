@@ -59,22 +59,6 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
                     config = configparser.ConfigParser()
                     config['STYLES'] = {'font_color': font_color, 'font': font}
                     config.write(f)
-            case "Switch to advanced mode:":
-                config = configparser.ConfigParser()
-                config.read(os.path.join(blog_post_folder_path, "config.ini"))                
-                isAdvancedMode = config['EDITOR']['isAdvancedMode']
-                if not isAdvancedMode:
-                    md_data = request.form['content']
-                    html_data = markdown.markdown(md_data)
-                    with open(os.path.join(blog_post_folder_path, "content.txt"), 'w') as f:
-                        f.write(html_data) #write data stuffs
-            case "Switch to basic mode:":
-                config = configparser.ConfigParser()
-                config.read(os.path.join(blog_post_folder_path, "config.ini"))                
-                isAdvancedMode = config['EDITOR']['isAdvancedMode']
-                if isAdvancedMode:
-                    with open(os.path.join(blog_post_folder_path, "content.txt"), 'w') as f:
-                        f.write(request.form['content'])
     else:
         config = configparser.ConfigParser()
         config.read(os.path.join(blog_post_folder_path, "basic-styles.ini"))
@@ -96,7 +80,9 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
 @app.route("/export", methods=("GET", "POST"))
 def export():
     if request.method == "POST":
-        pass
+         match request.form["btn"]:
+            case "Export":
+                pass
     return render_template("export.html")
 
 # Main
