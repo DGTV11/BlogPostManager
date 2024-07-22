@@ -95,7 +95,9 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
 
 @app.route("/export", methods=("GET", "POST"))
 def export():
-    pass
+    if request.method == "POST":
+        pass
+    return render_template("export.html")
 
 # Main
 def get_bp_names_from_bp_ids(ids):

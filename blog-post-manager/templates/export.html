@@ -1,22 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Blog Post Manager</title>
+    <title>Export Blog Posts</title>
   <body>
-    <h1>Blog Post Manager</h1>
-    <h2>Blog Posts</h2>
-    {% for pst_id, pst_name in post_ids_n_names.items() %}
-      <form method="post">
-        <a href="{{url_for('posts', postid=pst_id)}}">{{pst_name}}</a>
-        <input type="hidden" name="pst_id" value="{{pst_id}}" />
-        <input type="submit" name="btn" value="Delete post" />
-      </form>
-    {% endfor %}
+    <h1>Export Blog Posts</h1>
     <form method="post">
-      <label for="title">Post title</label>
-      <input type="text" name="title" value="{{ request.form['title']}}" />
-      <input type="submit" name="btn" value="Create new blog post" />
+      <input name="btn" type="submit" value="Export" />
     </form>
-    <button><a href="{{url_for('export')}}" style="text-decoration: none;color: black;">Back to menu</a></button>
+    <button><a href="/" style="text-decoration: none;color: black;">Back to menu</a></button>
   </body>
 <html>
