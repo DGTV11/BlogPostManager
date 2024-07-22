@@ -53,6 +53,9 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
 
                 with open(os.path.join(blog_post_folder_path, "content.txt"), 'w') as f:
                     f.write(request.form['content'])
+                
+                with open(os.path.join(blog_post_folder_path, "description.txt"), 'w') as f:
+                    f.write(request.form['desc'])
 
                 with open(os.path.join(blog_post_folder_path, "basic-styles.ini"), 'w') as f:
                     config = configparser.ConfigParser()
@@ -83,11 +86,14 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
     with open(os.path.join(blog_post_folder_path, "content.txt"), "r") as f:
         postcontent = f.read()
 
+    with open(os.path.join(blog_post_folder_path, "description.txt"), "r") as f:
+        postdesc = f.read()
+
     config = configparser.ConfigParser()
     config.read(os.path.join(os.path.dirname(__file__), "blog-posts", postid, "config.ini"))
     postname = config['NAME']['post_name']
 
-    return render_template("editor.html", post_name=postname, post_content=postcontent, font_color=font_color, font_fonty_font_font=font)
+    return render_template("editor.html", post_name=postname, post_desc=postdesc, post_content=postcontent, font_color=font_color, font_fonty_font_font=font)
 
 def get_bp_names_from_bp_ids(ids):
     bp_names = []
@@ -123,6 +129,9 @@ def main():
 
                 with open(os.path.join(blog_post_folder_path, "content.txt"), 'w+') as f:
                     f.write('## Hello, world!')
+
+                with open(os.path.join(blog_post_folder_path, "description.txt"), 'w+') as f:
+                    f.write('Insert description here')
 
                 # initialise basic-styles.ini (create it in same directory as config.ini and content.txt) with DEFAULT styles, add persistence to BASIC style editor (convert GUI stuffs to css file also plz add `system-ui` font and support for google fonts)
                 with open(os.path.join(blog_post_folder_path, "basic-styles.ini"), 'w') as f:

@@ -10,6 +10,11 @@
     <form method="post">
       Blog title: <input name="title" value="{{ post_name }}" />
       <br><br>
+      <label for="desc">Description:</label>
+      <br>
+      <textarea id="desc" name="desc" onInput="this.parentNode.dataset.replicatedValue = this.value">{{ post_desc }}</textarea>
+
+      <br><br>
 
       <label for="font-color">Font Color:</label>
       <input type="color" id="font-color" name="font-color" value="{{ font_color }}">
