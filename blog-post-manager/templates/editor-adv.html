@@ -9,14 +9,28 @@
       <link rel="stylesheet" href="styles.css">
    </head>
    <body>
+    <form method = "POST">
       <div class="grid-container">
          <div class="grid-item">HTML editor</div>
-             <textarea id="content" name="content">{{ post_content_in_html }}</textarea>
+             <textarea id="content" name="content">{{ post_html }}</textarea>
          <div class="grid-item">CSS editor</div>
-            <textarea id="content" name="content">{{ post_content }}</textarea>
+            <textarea id="content" name="content">{{ post_css }}</textarea>
          <div class="grid-item">Preview</div>
-            <textarea id="content" name="content">{{ post_content }}</textarea>
+            <textarea id="content" name="content">{{ post_content_preview }}</textarea>
 
       </div>
+      <input name="btn" type="submit" value="Save" />
+      <button><a href="/" style="text-decoration: none;color: black;">Back to menu</a></button>
+      <input name="btn" type="submit" value="Switch to advanced mode" />
+      </form>
    </body>
+   <style>
+    .editor-preview,
+      .editor-preview-side {
+        color: {{ font_color }};
+        font-family: {{ font_fonty_font_font }}, system-ui;
+        font-size: {{ font_size }}, ;
+        
+      }
+  </style>
 </html>
