@@ -5,7 +5,7 @@ import os, configparser, shutil
 from flask import Flask, url_for, request, render_template, abort, flash
 from markupsafe import escape
 
-import markdown, markdownify
+import markdown
 
 app = Flask(__name__)
 
