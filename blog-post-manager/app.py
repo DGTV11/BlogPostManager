@@ -10,16 +10,14 @@ import markdown, markdownify
 app = Flask(__name__)
 
 
-class BlogPostHelpers:
-    @staticmethod
-    def list_blog_post_ids():
-        blog_post_filepaths = glob(
-            os.path.join(os.path.dirname(__file__), "blog-posts", "*", "")
-        )
-        blog_post_id_list = list(
-            map(lambda s: os.path.basename(os.path.split(s)[0]), blog_post_filepaths)
-        )
-        return blog_post_id_list
+def list_blog_post_ids():
+    blog_post_filepaths = glob(
+        os.path.join(os.path.dirname(__file__), "blog-posts", "*", "")
+    )
+    blog_post_id_list = list(
+        map(lambda s: os.path.basename(os.path.split(s)[0]), blog_post_filepaths)
+    )
+    return blog_post_id_list
 
 
 # Stuff
@@ -30,7 +28,7 @@ def info():
 
 @app.route("/posts/<postid>", methods=("GET", "POST"))
 def posts(postid):  # check GH Project for TODO list (to fix this)
-    if postid not in BlogPostHelpers.list_blog_post_ids():
+    if postid not in list_blog_post_ids():
         abort(404)  # TODO: make error page more user-friendly
 
     blog_post_folder_path = os.path.join(os.path.dirname(__file__), "blog-posts", postid)
@@ -53,7 +51,7 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
 
                 with open(os.path.join(blog_post_folder_path, "content.txt"), 'w') as f:
                     f.write(request.form['content'])
-                
+            
                 with open(os.path.join(blog_post_folder_path, "description.txt"), 'w') as f:
                     f.write(request.form['desc'])
 
@@ -95,6 +93,11 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
 
     return render_template("editor.html", post_name=postname, post_desc=postdesc, post_content=postcontent, font_color=font_color, font_fonty_font_font=font)
 
+@app.route("/export", methods=("GET", "POST"))
+def export():
+    pass
+
+# Main
 def get_bp_names_from_bp_ids(ids):
     bp_names = []
     for id in ids:
@@ -104,7 +107,6 @@ def get_bp_names_from_bp_ids(ids):
 
     return bp_names
 
-# Main
 @app.route("/", methods=("GET", "POST"))
 def main():
     if request.method == "POST": # CREATES NEW POST
@@ -115,7 +117,7 @@ def main():
                     flash("Title is required!")
 
                 post_id = f"{uuid4().hex}0{uuid4().hex}"
-                while post_id in BlogPostHelpers.list_blog_post_ids():
+                while post_id in list_blog_post_ids():
                     post_id = f"{uuid4().hex}0{uuid4().hex}"
 
                 blog_post_folder_path = os.path.join(os.path.dirname(__file__), "blog-posts", post_id)
@@ -145,7 +147,7 @@ def main():
                     os.path.join(os.path.dirname(__file__), "blog-posts", post_id)
                 )
 
-    all_blog_post_ids = BlogPostHelpers.list_blog_post_ids()
+    all_blog_post_ids = list_blog_post_ids()
     return render_template("index.html", post_ids_n_names={id: name for id, name in zip(all_blog_post_ids, get_bp_names_from_bp_ids(all_blog_post_ids))})
 
 
