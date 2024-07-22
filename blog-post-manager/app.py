@@ -77,8 +77,6 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
                 if isAdvancedMode:
                     with open(os.path.join(blog_post_folder_path, "content.txt"), 'w') as f:
                         f.write(request.form['content'])
-            case "Switch to advanced mode":
-                pass
     else:
         config = configparser.ConfigParser()
         config.read(os.path.join(blog_post_folder_path, "basic-styles.ini"))
