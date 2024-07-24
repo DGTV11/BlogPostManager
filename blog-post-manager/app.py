@@ -10,6 +10,7 @@ import markdown
 app = Flask(__name__)
 
 
+
 def list_blog_post_ids():
     blog_post_filepaths = glob(
         os.path.join(os.path.dirname(__file__), "blog-posts", "*", "")
@@ -28,6 +29,7 @@ def info():
 
 @app.route("/posts/<postid>", methods=("GET", "POST"))
 def posts(postid):  # check GH Project for TODO list (to fix this)
+    saved = False
     if postid not in list_blog_post_ids():
         abort(404)  # TODO: make error page more user-friendly
 
@@ -59,6 +61,10 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
                     config = configparser.ConfigParser()
                     config['STYLES'] = {'font_color': font_color, 'font': font}
                     config.write(f)
+                saved = True
+            
+        return render_template('editor.html', saved=saved, postid=postid) # post_desc=postdesc, post_content=postcontent, font_color=font_color, font_fonty_font_font=font)
+    
     else:
         config = configparser.ConfigParser()
         config.read(os.path.join(blog_post_folder_path, "basic-styles.ini"))
