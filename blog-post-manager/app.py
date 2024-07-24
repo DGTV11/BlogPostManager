@@ -136,8 +136,8 @@ def export():
                 blog_pages = ""
                 styles = ""
                 for blog_post_id, blog_post_name, blog_post_description, blog_post_content, blog_post_style in zip(all_blog_post_ids, all_blog_post_names, all_blog_post_descriptions, all_blog_post_contents, all_blog_post_styles):
-                    links_to_blog_posts += f'<section><h3><a onClick="showPage({blog_post_id})">{blog_post_name}</a></h3><p>{blog_post_description}</p></section>/n'
-                    blog_pages += f'<div id="{blog_post_id}" class="page"><h1>{blog_post_name}</h2><h3>{blog_post_description}</h3><p style="{blog_post_style}">{blog_post_content}</p></div>/n'
+                    links_to_blog_posts += f'<section><h3><a onClick="showPage({blog_post_id})">{blog_post_name}</a></h3><p>{blog_post_description}</p></section>\n'
+                    blog_pages += f'<div id="{blog_post_id}" class="page"><h1>{blog_post_name}</h2><h3>{blog_post_description}</h3><p style="{blog_post_style}">{blog_post_content}</p></div>\n'
 
                 export_html = EXPORT_TEMPLATE_TXT.replace("@BLOGNAME@", request.form["blog_name"]).replace("@LINKS_TO_BLOG_POSTS@", links_to_blog_posts).replace("@BLOG_PAGES@", blog_pages)
 
