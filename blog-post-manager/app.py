@@ -73,7 +73,7 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
                     config['STYLES'] = {'font_color': font_color, 'font': font}
                     config.write(f)
                 saved = True
-        # The part to reload the stuff back
+        # Re-render everything back to the editor page
         config = configparser.ConfigParser()
         config.read(os.path.join(blog_post_folder_path, "basic-styles.ini"))
         font_color = config['STYLES']['font_color']
