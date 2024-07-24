@@ -127,6 +127,13 @@ def export():
                     with open(os.path.join(blog_post_folder_path, "content.txt"), 'r') as f:
                         all_blog_post_contents.append(f.read())
 
+                    with open(os.path.join(blog_post_folder_path, "styles.ini"), 'r') as f:
+                        config = configparser.ConfigParser()
+                        config.read(os.path.join(blog_post_folder_path, "basic-styles.ini"))
+                        font_color = config['STYLES']['font_color']
+                        font = config['STYLES']['font']
+                        all_blog_post_styles.append(f"color: {font_color}; font-family: {font}, system-ui;")
+
     return render_template("export.html")
 
 # Main
