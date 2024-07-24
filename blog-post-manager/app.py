@@ -13,6 +13,7 @@ with open(os.path.join(os.paht.dirname(__file__), "export-template.html"), 'r') 
 app = Flask(__name__)
 
 
+
 def list_blog_post_ids():
     blog_post_filepaths = glob(
         os.path.join(os.path.dirname(__file__), "blog-posts", "*", "")
@@ -39,6 +40,7 @@ def info():
 
 @app.route("/posts/<postid>", methods=("GET", "POST"))
 def posts(postid):  # check GH Project for TODO list (to fix this)
+    saved = False
     if postid not in list_blog_post_ids():
         abort(404)  # TODO: make error page more user-friendly
 
@@ -70,6 +72,22 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
                     config = configparser.ConfigParser()
                     config['STYLES'] = {'font_color': font_color, 'font': font}
                     config.write(f)
+                saved = True
+        # The part to reload the stuff back
+        config = configparser.ConfigParser()
+        config.read(os.path.join(blog_post_folder_path, "basic-styles.ini"))
+        font_color = config['STYLES']['font_color']
+        font = config['STYLES']['font']
+        config.read(os.path.join(os.path.dirname(__file__), "blog-posts", postid, "config.ini"))
+        postname = config['NAME']['post_name']
+
+        with open(os.path.join(blog_post_folder_path, "content.txt"), "r") as f:
+            postcontent = f.read()
+
+        with open(os.path.join(blog_post_folder_path, "description.txt"), "r") as f:
+            postdesc = f.read()   
+        return render_template('editor.html', saved=saved, postid=postid, post_name=postname, post_desc=postdesc, post_content=postcontent, font_color=font_color, font_fonty_font_font=font)
+        #Apologies, a bit disgusting but well a cool tiny detail no one will notice has been added!
     else:
         config = configparser.ConfigParser()
         config.read(os.path.join(blog_post_folder_path, "styles.ini"))

@@ -52,6 +52,9 @@
       <br><br>
       <input name="btn" type="submit" value="Save" />
       <button><a href="/" style="text-decoration: none;color: black;">Back to menu</a></button>
+      {% if saved %}
+        <p style="color: green;">Successfully saved!</p>
+      {% endif %}
     </form>
   </body>
 
