@@ -126,12 +126,11 @@ def export():
                     with open(os.path.join(blog_post_folder_path, "content.txt"), 'r') as f:
                         all_blog_post_contents.append(f.read())
 
-                    with open(os.path.join(blog_post_folder_path, "styles.ini"), 'r') as f:
-                        config = configparser.ConfigParser()
-                        config.read(os.path.join(blog_post_folder_path, "basic-styles.ini"))
-                        font_color = config['STYLES']['font_color']
-                        font = config['STYLES']['font']
-                        all_blog_post_styles.append(f"color: {font_color}; font-family: {font}, system-ui;")
+                    config = configparser.ConfigParser()
+                    config.read(os.path.join(blog_post_folder_path, "styles.ini"))
+                    font_color = config['STYLES']['font_color']
+                    font = config['STYLES']['font']
+                    all_blog_post_styles.append(f"color: {font_color}; font-family: {font}, system-ui;")
 
                 links_to_blog_posts = ""
                 blog_pages = ""
@@ -145,7 +144,7 @@ def export():
                 with open(os.path.join(os.path.dirname(__file__), 'tmp', 'blog.html'), 'w+') as f:
                     f.write(export_html)
 
-                send_file(os.path.join(os.path.dirname(__file__), 'tmp', 'blog.html'), attachment_filename="blog.html")
+                return send_file(os.path.join(os.path.dirname(__file__), 'tmp', 'blog.html'))
 
     return render_template("export.html")
 
