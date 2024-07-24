@@ -7,6 +7,9 @@ from markupsafe import escape
 
 import markdown
 
+with open(os.path.join(os.paht.dirname(__file__), "export-template.html"), 'r') as f:
+    EXPORT_TEMPLATE_TXT = f.read()
+
 app = Flask(__name__)
 
 
@@ -19,6 +22,14 @@ def list_blog_post_ids():
     )
     return blog_post_id_list
 
+def get_bp_names_from_bp_ids(ids):
+    bp_names = []
+    for id in ids:
+        config = configparser.ConfigParser()
+        config.read(os.path.join(os.path.dirname(__file__), "blog-posts", id, "config.ini"))
+        bp_names.append(config['NAME']['post_name'])
+
+    return bp_names
 
 # Stuff
 @app.route("/info")
@@ -55,13 +66,13 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
                 with open(os.path.join(blog_post_folder_path, "description.txt"), 'w') as f:
                     f.write(request.form['desc'])
 
-                with open(os.path.join(blog_post_folder_path, "basic-styles.ini"), 'w') as f:
+                with open(os.path.join(blog_post_folder_path, "styles.ini"), 'w') as f:
                     config = configparser.ConfigParser()
                     config['STYLES'] = {'font_color': font_color, 'font': font}
                     config.write(f)
     else:
         config = configparser.ConfigParser()
-        config.read(os.path.join(blog_post_folder_path, "basic-styles.ini"))
+        config.read(os.path.join(blog_post_folder_path, "styles.ini"))
         font_color = config['STYLES']['font_color']
         font = config['STYLES']['font']
 
@@ -82,18 +93,25 @@ def export():
     if request.method == "POST":
          match request.form["btn"]:
             case "Export":
-                pass
+                export_html = EXPORT_TEMPLATE_TXT.replace("@BLOGNAME@", request.form["blog_name"])
+                all_blog_post_ids = list_blog_post_ids()
+                all_blog_post_names = get_bp_names_from_bp_ids(all_blog_post_ids)
+                all_blog_post_descriptions = []
+                all_blog_post_contents = []
+                all_blog_post_styles = []
+
+                for blog_post_id in all_blog_post_ids:
+                    blog_post_folder_path = os.path.join(os.path.dirname(__file__), "blog-posts", blog_post_id)
+
+                    with open(os.path.join(blog_post_folder_path, "description.txt"), 'r') as f:
+                        all_blog_post_descriptions.append(f.read())
+
+                    with open(os.path.join(blog_post_folder_path, "content.txt"), 'r') as f:
+                        all_blog_post_contents.append(f.read())
+
     return render_template("export.html")
 
 # Main
-def get_bp_names_from_bp_ids(ids):
-    bp_names = []
-    for id in ids:
-        config = configparser.ConfigParser()
-        config.read(os.path.join(os.path.dirname(__file__), "blog-posts", id, "config.ini"))
-        bp_names.append(config['NAME']['post_name'])
-
-    return bp_names
 
 @app.route("/", methods=("GET", "POST"))
 def main():
@@ -123,8 +141,8 @@ def main():
                 with open(os.path.join(blog_post_folder_path, "description.txt"), 'w+') as f:
                     f.write('Insert description here')
 
-                # initialise basic-styles.ini (create it in same directory as config.ini and content.txt) with DEFAULT styles, add persistence to BASIC style editor (convert GUI stuffs to css file also plz add `system-ui` font and support for google fonts)
-                with open(os.path.join(blog_post_folder_path, "basic-styles.ini"), 'w') as f:
+                # initialise styles.ini (create it in same directory as config.ini and content.txt) with DEFAULT styles, add persistence to BASIC style editor (convert GUI stuffs to css file also plz add `system-ui` font and support for google fonts)
+                with open(os.path.join(blog_post_folder_path, "styles.ini"), 'w') as f:
                     config = configparser.ConfigParser()
                     config['STYLES'] = {'font_color': '#000000', 'font': 'system-ui'}
                     config.write(f)
