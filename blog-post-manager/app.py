@@ -2,7 +2,7 @@ from glob import glob
 from uuid import uuid4
 import os, configparser, shutil
 
-from flask import Flask, url_for, request, render_template, abort, flash
+from flask import Flask, url_for, request, render_template, abort, flash, send_file
 from markupsafe import escape
 
 import markdown
@@ -111,7 +111,6 @@ def export():
     if request.method == "POST":
          match request.form["btn"]:
             case "Export":
-                export_html = EXPORT_TEMPLATE_TXT.replace("@BLOGNAME@", request.form["blog_name"])
                 all_blog_post_ids = list_blog_post_ids()
                 all_blog_post_names = get_bp_names_from_bp_ids(all_blog_post_ids)
                 all_blog_post_descriptions = []
@@ -133,6 +132,20 @@ def export():
                         font_color = config['STYLES']['font_color']
                         font = config['STYLES']['font']
                         all_blog_post_styles.append(f"color: {font_color}; font-family: {font}, system-ui;")
+
+                links_to_blog_posts = ""
+                blog_pages = ""
+                styles = ""
+                for blog_post_id, blog_post_name, blog_post_description, blog_post_content, blog_post_style in zip(all_blog_post_ids, all_blog_post_names, all_blog_post_descriptions, all_blog_post_contents, all_blog_post_styles):
+                    links_to_blog_posts += f'<section><h3><a onClick="showPage({blog_post_id})">{blog_post_name}</a></h3><p>{blog_post_description}</p></section>/n'
+                    blog_pages += f'<div id="{blog_post_id}" class="page"><h1>{blog_post_name}</h2><h3>{blog_post_description}</h3><p style="{blog_post_style}">{blog_post_content}</p></div>/n'
+
+                export_html = EXPORT_TEMPLATE_TXT.replace("@BLOGNAME@", request.form["blog_name"]).replace("@LINKS_TO_BLOG_POSTS@", links_to_blog_posts).replace("@BLOG_PAGES@", blog_pages)
+
+                with open(os.path.join(os.path.dirname(__file__), 'tmp', 'blog.html'), 'w+') as f:
+                    f.write(export_html)
+
+                send_file(os.path.join(os.path.dirname(__file__), 'tmp', 'blog.html'), attachment_filename="blog.html")
 
     return render_template("export.html")
 
