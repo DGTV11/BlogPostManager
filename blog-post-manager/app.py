@@ -75,7 +75,7 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
                 saved = True
         # Re-render everything back to the editor page
         config = configparser.ConfigParser()
-        config.read(os.path.join(blog_post_folder_path, "basic-styles.ini"))
+        config.read(os.path.join(blog_post_folder_path, "styles.ini"))
         font_color = config['STYLES']['font_color']
         font = config['STYLES']['font']
         config.read(os.path.join(os.path.dirname(__file__), "blog-posts", postid, "config.ini"))
