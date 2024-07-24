@@ -11,7 +11,7 @@ with open(os.path.join(os.paht.dirname(__file__), "export-template.html"), 'r') 
     EXPORT_TEMPLATE_TXT = f.read()
 
 app = Flask(__name__)
-
+app.config["SECRET_KEY"] = "aslkjhlhkjfdsalkjhfdsha" #tks sean
 
 
 def list_blog_post_ids():
