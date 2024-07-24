@@ -7,7 +7,7 @@ from markupsafe import escape
 
 import markdown
 
-with open(os.path.join(os.paht.dirname(__file__), "export-template.html"), 'r') as f:
+with open(os.path.join(os.path.dirname(__file__), "export-template.html"), 'r') as f:
     EXPORT_TEMPLATE_TXT = f.read()
 
 app = Flask(__name__)
