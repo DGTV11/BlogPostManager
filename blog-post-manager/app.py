@@ -62,9 +62,21 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
                     config['STYLES'] = {'font_color': font_color, 'font': font}
                     config.write(f)
                 saved = True
-            
-        return render_template('editor.html', saved=saved, postid=postid) # post_desc=postdesc, post_content=postcontent, font_color=font_color, font_fonty_font_font=font)
-    
+        # The part to reload the stuff back
+        config = configparser.ConfigParser()
+        config.read(os.path.join(blog_post_folder_path, "basic-styles.ini"))
+        font_color = config['STYLES']['font_color']
+        font = config['STYLES']['font']
+        config.read(os.path.join(os.path.dirname(__file__), "blog-posts", postid, "config.ini"))
+        postname = config['NAME']['post_name']
+
+        with open(os.path.join(blog_post_folder_path, "content.txt"), "r") as f:
+            postcontent = f.read()
+
+        with open(os.path.join(blog_post_folder_path, "description.txt"), "r") as f:
+            postdesc = f.read()   
+        return render_template('editor.html', saved=saved, postid=postid, post_name=postname, post_desc=postdesc, post_content=postcontent, font_color=font_color, font_fonty_font_font=font)
+        #Apologies, a bit disgusting but well a cool tiny detail no one will notice has been added!
     else:
         config = configparser.ConfigParser()
         config.read(os.path.join(blog_post_folder_path, "basic-styles.ini"))
