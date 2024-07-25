@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Single Page App</title>
+    <title>@BLOGNAME@</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -17,6 +17,8 @@
         nav {
             margin-bottom: 20px;
         }
+        
+        @STYLES@
     </style>
 </head>
 <body>
@@ -24,7 +26,10 @@
       @NAVBAR@
     </nav>
 
-    @HOMEPAGE@
+    <div id="home" class="page active">
+      <h1>@BLOGNAME@</h1>
+      @LINKS_TO_BLOG_POSTS@
+    </div>
 
     @BLOG_PAGES@
 
