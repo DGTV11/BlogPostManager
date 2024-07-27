@@ -91,6 +91,28 @@
       button {
             margin: 20px;
       }
+
+        .page-transition-enter {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .page-transition-enter-active {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+
+        .page-transition-exit {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .page-transition-exit-active {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s, transform 0.5s;
+        }
     </style>
         <body>
           <h1>Export Blog Posts</h1>
@@ -99,6 +121,36 @@
             <input id="blog_name" name="blog_name" type="text" />
             <input name="btn" type="submit" value="Export" />
           </form>
-          <button><a href="/" style="text-decoration: none;color: black;">Back to menu</a></button>
+          <button><a href="/">Back to menu</a></button>
+            <script>
+                document.addEventListener("DOMContentLoaded", () => {
+                    const links = document.querySelectorAll("a");
+                    links.forEach(link => {
+                        link.addEventListener("click", (event) => {
+                            event.preventDefault();
+                            const href = link.getAttribute("href");
+                            document.body.classList.add("page-transition-exit");
+                            setTimeout(() => {
+                                window.location.href = href;
+                            }, 500);
+                        });
+                    });
+                });
+
+                window.addEventListener("pageshow", (event) => {
+                    if (event.persisted) {
+                        document.body.classList.remove("page-transition-exit-active");
+                        document.body.classList.add("page-transition-enter");
+                        requestAnimationFrame(() => {
+                            document.body.classList.add("page-transition-enter-active");
+                        });
+                    }
+                });
+
+                document.body.classList.add("page-transition-enter");
+                requestAnimationFrame(() => {
+                    document.body.classList.add("page-transition-enter-active");
+                });
+            </script>
         </body>
       <html>
