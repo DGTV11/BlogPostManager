@@ -263,3 +263,6 @@ pyrightconfig.json
 
 blog-post-manager/blog-posts/*
 !blog-post-manager/blog-posts/.gitkeep
+
+blog-post-manager/tmp/*
+!blog-post-manager/tmp/.gitkeep

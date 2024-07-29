@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@BLOGNAME@</title>
+    <title>Test Blog</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -48,15 +48,20 @@
 </head>
 <body>
     <nav>
-        
+      @NAVBAR@
     </nav>
 
     <div id="home" class="page active">
-      <h1>@BLOGNAME@</h1>
-      @LINKS_TO_BLOG_POSTS@
+      <h1>Test Blog</h1>
+      <section><a class="h3-a" onClick="showPage('0f06dba1b133463ba4ea7dfe248e1c5c0f678476d52244e60b42b14cda0470e6c')">manifesto</a><p>Insert description here</p></section>
+<section><a class="h3-a" onClick="showPage('62f2fc115cb94aca946bf54db5a19bba087006296ba0a4fae9068e218debaa198')">jigglypuff song</a><p>Insert description hehe test test</p></section>
+
     </div>
 
-    @BLOG_PAGES@
+    <div id="0f06dba1b133463ba4ea7dfe248e1c5c0f678476d52244e60b42b14cda0470e6c" class="page"><h1>manifesto</h2><h3>Insert description here</h3><p style="color: #000000; font-family: system-ui, system-ui;"><h2>Hail Jigglypuff!!!</h2>
+<h3>To the Wigglebar!!!</h3></p></div>
+<div id="62f2fc115cb94aca946bf54db5a19bba087006296ba0a4fae9068e218debaa198" class="page"><h1>jigglypuff song</h2><h3>Insert description hehe test test</h3><p style="color: #000000; font-family: Courier, system-ui;"><p>Jigglypuff &gt; Togedemaru objectively</p></p></div>
+
 
     <script>
         function showPage(pageId) {
