@@ -231,6 +231,10 @@
                   color: {{ font_color }};
                   font-family: {{ font_fonty_font_font }}, system-ui;
                 }
+
+              .CodeMirror-cursor {
+                border-left: 1px solid #FFF;
+              }
             </style>
           <script>
             var simplemde = new SimpleMDE({ element: document.getElementById("content") });
@@ -265,5 +269,4 @@
             document.body.classList.add("page-transition-enter-active");
         });
     </script>
-
-          </html>
+</html>
