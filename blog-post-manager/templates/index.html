@@ -32,6 +32,23 @@
             transition: box-shadow 0.3s, transform 0.3s;
         }
 
+        form div {
+            flex-grow: 3;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px;
+            padding: 20px;
+            background-color: #3a3a3a;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            transition: box-shadow 0.3s, transform 0.3s;
+        }
+
+        form div~input {
+          flex-grow: 1;
+        }
+
         form:hover {
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
             transform: scale(1.01);
@@ -149,9 +166,11 @@
             <input type="submit" name="btn" value="Delete post" />
           </form>
         {% endfor %}
-        <form method="post">
-          <label for="title">Post title</label>
-          <input type="text" name="title" value="{{ request.form['title']}}" />
+        <form class="make-post" method="post">
+          <div>
+            <label for="title">Post title</label>
+            <input type="text" name="title" value="{{ request.form['title']}}" />
+          </div>
           <input type="submit" name="btn" value="Create new blog post" />
         </form>
         <br>
