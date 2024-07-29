@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@BLOGNAME@</title>
     <style>
+        .title{
+            text-align: left;
+            color: #f1f1f1;
+            margin-left: 20px;
+        }
         body {
             font-family: Arial, sans-serif;
         }
@@ -42,6 +47,8 @@
         a.h3-a:focus {
             outline: 2px solid blue; /* Focus outline for accessibility */
         }
+
+        
         
         @STYLES@
     </style>
@@ -50,7 +57,9 @@
     <nav>
         <a class="h3-a" onClick="showPage('home')">@BLOGNAME@</a>
         @NAVBAR@
-    </nav>
+
+        <title class="title"></a>a href="/">Blog Post Manager</a></title>
+        </nav>
 
     <div id="home" class="page active">
       <h1>@BLOGNAME@</h1>
