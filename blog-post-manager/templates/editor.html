@@ -218,6 +218,9 @@
                 <textarea id="content" name="content">{{ post_content }}</textarea>
                 <br><br>
                 <input name="btn" type="submit" value="Save" />
+                {% if saved %}
+                <p style="color: green;">Successfully saved!</p>
+                {% endif %}
                 <button><a href="/">Back to menu</a></button>
               </form>
             </body>
