@@ -32,6 +32,23 @@
             transition: box-shadow 0.3s, transform 0.3s;
         }
 
+        form div {
+            flex-grow: 3;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px;
+            padding: 20px;
+            background-color: #3a3a3a;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            transition: box-shadow 0.3s, transform 0.3s;
+        }
+
+        form div~input {
+          flex-grow: 1;
+        }
+
         form:hover {
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
             transform: scale(1.01);
@@ -117,8 +134,10 @@
         <body>
           <h1>Export Blog Posts</h1>
           <form method="post">
-            <label for="blog_name">Blog name</label>
-            <input id="blog_name" name="blog_name" type="text" />
+            <div>
+              <label for="blog_name">Blog name</label>
+              <input id="blog_name" name="blog_name" type="text" />
+            </div>
             <input name="btn" type="submit" value="Export" />
           </form>
           <button><a href="/">Back to menu</a></button>
