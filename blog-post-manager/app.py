@@ -72,22 +72,6 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
                     config = configparser.ConfigParser()
                     config['STYLES'] = {'font_color': font_color, 'font': font}
                     config.write(f)
-                saved = True
-        # Re-render everything back to the editor page
-        config = configparser.ConfigParser()
-        config.read(os.path.join(blog_post_folder_path, "styles.ini"))
-        font_color = config['STYLES']['font_color']
-        font = config['STYLES']['font']
-        config.read(os.path.join(os.path.dirname(__file__), "blog-posts", postid, "config.ini"))
-        postname = config['NAME']['post_name']
-
-        with open(os.path.join(blog_post_folder_path, "content.txt"), "r") as f:
-            postcontent = f.read()
-
-        with open(os.path.join(blog_post_folder_path, "description.txt"), "r") as f:
-            postdesc = f.read()   
-        return render_template('editor.html', saved=saved, postid=postid, post_name=postname, post_desc=postdesc, post_content=postcontent, font_color=font_color, font_fonty_font_font=font)
-        #Apologies, a bit disgusting but well a cool tiny detail no one will notice has been added!
     else:
         config = configparser.ConfigParser()
         config.read(os.path.join(blog_post_folder_path, "styles.ini"))
@@ -144,7 +128,7 @@ def export():
                 with open(os.path.join(os.path.dirname(__file__), 'tmp', 'blog.html'), 'w+') as f:
                     f.write(export_html)
 
-                return send_file(os.path.join(os.path.dirname(__file__), 'tmp', 'blog.html'))
+                return send_file(os.path.join(os.path.dirname(__file__), 'tmp', 'blog.html'), as_attachment=True)
 
     return render_template("export.html")
 
