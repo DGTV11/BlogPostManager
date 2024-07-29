@@ -1,209 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <title>Blog Post Manager</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+    <head>
+        <title>Blog Post Manager</title>
+        <style>
+            @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #2b2b2b;
-            color: #d1d1d1;
-            margin: 0;
-            padding: 0;
-            transition: background-color 0.3s, color 0.3s;
-        }
+            body {
+                font-family: "Roboto", sans-serif;
+                background-color: #2b2b2b;
+                color: #d1d1d1;
+                margin: 0;
+                padding: 0;
+                transition: background-color 0.3s, color 0.3s;
+            }
 
-        h1, h2 {
-            text-align: left;
-            color: #f1f1f1;
-            margin-left: 20px;
-        }
+            h1,
+            h2 {
+                text-align: left;
+                color: #f1f1f1;
+                margin-left: 20px;
+            }
 
-        form {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 20px;
-            padding: 20px;
-            background-color: #3a3a3a;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            border-radius: 8px;
-            transition: box-shadow 0.3s, transform 0.3s;
-        }
+            form {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin: 20px;
+                padding: 20px;
+                background-color: #3a3a3a;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+                border-radius: 8px;
+                transition: box-shadow 0.3s, transform 0.3s;
+            }
 
-        form div {
-            flex-grow: 3;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 20px;
-            padding: 20px;
-            background-color: #3a3a3a;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            border-radius: 8px;
-            transition: box-shadow 0.3s, transform 0.3s;
-        }
+            form div {
+                flex-grow: 3;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin: 20px;
+                padding: 20px;
+                background-color: #3a3a3a;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+                border-radius: 8px;
+                transition: box-shadow 0.3s, transform 0.3s;
+            }
 
-        form div~input {
-          flex-grow: 1;
-        }
+            form div ~ input {
+                flex-grow: 1;
+            }
 
-        form:hover {
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-            transform: scale(1.01);
-        }
+            form:hover {
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+                transform: scale(1.01);
+            }
 
-        label {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
+            label {
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
 
-        input[type="text"], 
-        textarea, 
-        select {
-            width: 30%;
-            max-width: 500x;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #555;
-            border-radius: 4px;
-            background-color: #444;
-            color: #ddd;
-            transition: background-color 0.3s, border-color 0.3s, transform 0.3s;
-        }
+            input[type="text"],
+            textarea,
+            select {
+                width: 30%;
+                max-width: 500x;
+                padding: 10px;
+                margin: 10px 0;
+                border: 1px solid #555;
+                border-radius: 4px;
+                background-color: #444;
+                color: #ddd;
+                transition: background-color 0.3s, border-color 0.3s, transform 0.3s;
+            }
 
-        input[type="text"]:focus, 
-        textarea:focus, 
-        select:focus {
-            border-color: #6a6a6a;
-            background-color: #363636;
-            transform: scale(1.01);
-        }
+            input[type="text"]:focus,
+            textarea:focus,
+            select:focus {
+                border-color: #6a6a6a;
+                background-color: #363636;
+                transform: scale(1.01);
+            }
 
-        input[type="submit"], button {
-            background-color: #555;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
-        }
+            input[type="submit"],
+            button {
+                background-color: #555;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: background-color 0.3s, transform 0.3s;
+            }
 
-        input[type="submit"]:hover, button:hover {
-            background-color: #777;
-            transform: scale(1.05);
-        }
+            input[type="submit"]:hover,
+            button:hover {
+                background-color: #777;
+                transform: scale(1.05);
+            }
 
-        a {
-            text-decoration: none;
-            color: #ddd;
-            transition: color 0.3s, transform 0.3s;
-        }
+            a {
+                text-decoration: none;
+                color: #ddd;
+                transition: color 0.3s, transform 0.3s;
+            }
 
-        a:hover {
-            color: #eee;
-            transform: scale(1.05);
-        }
+            a:hover {
+                color: #eee;
+                transform: scale(1.05);
+            }
 
-        button a {
-            color: white;
-        }
+            button a {
+                color: white;
+            }
 
-        .material-symbols-outlined {
-            font-variation-settings:
-            'FILL' 0,
-            'wght' 400,
-            'GRAD' 0,
-            'opsz' 24;
-        }
+            .material-symbols-outlined {
+                font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+            }
 
-        .delete-icon {
-            cursor: pointer;
-            transition: color 0.3s;
-            color: #ff6666;
-        }
+            .delete-icon {
+                cursor: pointer;
+                transition: color 0.3s;
+                color: #ff6666;
+            }
 
-        .delete-icon:hover {
-            color: #ff0000;
-        }
+            .delete-icon:hover {
+                color: #ff0000;
+            }
 
-        button {
-            margin: 20px;
-        }
+            button {
+                margin: 20px;
+            }
 
-        .page-transition-enter {
-            opacity: 0;
-            transform: translateY(20px);
-        }
+            .page-transition-enter {
+                opacity: 0;
+                transform: translateY(20px);
+            }
 
-        .page-transition-enter-active {
-            opacity: 1;
-            transform: translateY(0);
-            transition: opacity 0.5s, transform 0.5s;
-        }
+            .page-transition-enter-active {
+                opacity: 1;
+                transform: translateY(0);
+                transition: opacity 0.5s, transform 0.5s;
+            }
 
-        .page-transition-exit {
-            opacity: 1;
-            transform: translateY(0);
-        }
+            .page-transition-exit {
+                opacity: 1;
+                transform: translateY(0);
+            }
 
-        .page-transition-exit-active {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s, transform 0.5s;
-        }
-    </style>
-</head>
-      <body>
+            .page-transition-exit-active {
+                opacity: 0;
+                transform: translateY(20px);
+                transition: opacity 0.5s, transform 0.5s;
+            }
+        </style>
+    </head>
+    <body>
         <h1>Blog Post Manager</h1>
         <h2>Blog Posts</h2>
         {% for pst_id, pst_name in post_ids_n_names.items() %}
-          <form method="post">
+        <form method="post">
             <a href="{{url_for('posts', postid=pst_id)}}">{{pst_name}}</a>
             <input type="hidden" name="pst_id" value="{{pst_id}}" />
             <input type="submit" name="btn" value="Delete post" />
-          </form>
+        </form>
         {% endfor %}
         <form class="make-post" method="post">
-          <div>
-            <label for="title">Post title</label>
-            <input type="text" name="title" value="{{ request.form['title']}}" />
-          </div>
-          <input type="submit" name="btn" value="Create new blog post" />
+            <div>
+                <label for="title">Post title</label>
+                <input type="text" name="title" value="{{ request.form['title']}}" />
+            </div>
+            <input type="submit" name="btn" value="Create new blog post" />
         </form>
-        <br>
+        <br />
         <button><a href="{{url_for('export')}}">Export</a></button>
-          <script>
-              document.addEventListener("DOMContentLoaded", () => {
-                  const links = document.querySelectorAll("a");
-                  links.forEach(link => {
-                      link.addEventListener("click", (event) => {
-                          event.preventDefault();
-                          const href = link.getAttribute("href");
-                          document.body.classList.add("page-transition-exit");
-                          setTimeout(() => {
-                              window.location.href = href;
-                          }, 500);
-                      });
-                  });
-              });
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const links = document.querySelectorAll("a");
+                links.forEach((link) => {
+                    link.addEventListener("click", (event) => {
+                        event.preventDefault();
+                        const href = link.getAttribute("href");
+                        document.body.classList.add("page-transition-exit");
+                        setTimeout(() => {
+                            window.location.href = href;
+                        }, 500);
+                    });
+                });
+            });
 
-              window.addEventListener("pageshow", (event) => {
-                  if (event.persisted) {
-                      document.body.classList.remove("page-transition-exit-active");
-                      document.body.classList.add("page-transition-enter");
-                      requestAnimationFrame(() => {
-                          document.body.classList.add("page-transition-enter-active");
-                      });
-                  }
-              });
+            window.addEventListener("pageshow", (event) => {
+                if (event.persisted) {
+                    document.body.classList.remove("page-transition-exit-active");
+                    document.body.classList.add("page-transition-enter");
+                    requestAnimationFrame(() => {
+                        document.body.classList.add("page-transition-enter-active");
+                    });
+                }
+            });
 
-              document.body.classList.add("page-transition-enter");
-              requestAnimationFrame(() => {
-                  document.body.classList.add("page-transition-enter-active");
-              });
-          </script>
-      </body>
-    <html>
+            document.body.classList.add("page-transition-enter");
+            requestAnimationFrame(() => {
+                document.body.classList.add("page-transition-enter-active");
+            });
+        </script>
+    </body>
+</html>
+

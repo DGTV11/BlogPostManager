@@ -1,74 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@BLOGNAME@</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .page {
-            display: none;
-        }
-        .active {
-            display: block;
-        }
-        nav {
-            margin-bottom: 20px;
-        }
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@BLOGNAME@</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+            }
+            .page {
+                display: none;
+            }
+            .active {
+                display: block;
+            }
+            nav {
+                margin-bottom: 20px;
+            }
 
-        a.h3-a { 
-            display: block;
-            font-size: 1.17em; /* Size similar to <h3> */
-            margin-top: 1em;
-            margin-bottom: 1em;
-            margin-left: 0;
-            margin-right: 0;
-            font-weight: bold; /* Bold like <h3> */
-            text-decoration: underline; /* Add underline */
-            color: blue; /* Signature blue color for links */
-            cursor: pointer; /* Pointer cursor for interactivity */
-        }
+            a.h3-a {
+                display: block;
+                font-size: 1.17em; /* Size similar to <h3> */
+                margin-top: 1em;
+                margin-bottom: 1em;
+                margin-left: 0;
+                margin-right: 0;
+                font-weight: bold; /* Bold like <h3> */
+                text-decoration: underline; /* Add underline */
+                color: blue; /* Signature blue color for links */
+                cursor: pointer; /* Pointer cursor for interactivity */
+            }
 
-        a.h3-a:hover {
-            color: darkblue; /* Darker blue on hover */
-        }
+            a.h3-a:hover {
+                color: darkblue; /* Darker blue on hover */
+            }
 
-        a.h3-a:visited {
-            color: purple; /* Purple color for visited links */
-        }
+            a.h3-a:visited {
+                color: purple; /* Purple color for visited links */
+            }
 
-        a.h3-a:focus {
-            outline: 2px solid blue; /* Focus outline for accessibility */
-        }
-        
-        @STYLES@
-    </style>
-</head>
-<body>
-    <nav>
-        <a class="h3-a" onClick="showPage('home')">@BLOGNAME@</a>
-        @NAVBAR@
-    </nav>
+            a.h3-a:focus {
+                outline: 2px solid blue; /* Focus outline for accessibility */
+            }
 
-    <div id="home" class="page active">
-      <h1>@BLOGNAME@</h1>
-      @LINKS_TO_BLOG_POSTS@
-    </div>
+            @STYLES@
+        </style>
+    </head>
+    <body>
+        <nav>
+            <a class="h3-a" onClick="showPage('home')">@BLOGNAME@</a>
+            @NAVBAR@
+        </nav>
 
-    @BLOG_PAGES@
+        <div id="home" class="page active">
+            <h1>@BLOGNAME@</h1>
+            @LINKS_TO_BLOG_POSTS@
+        </div>
 
-    <script>
-        function showPage(pageId) {
-            // Hide all pages
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
-            });
-            
-            // Show the selected page
-            document.getElementById(pageId).classList.add('active');
-        }
-    </script>
-</body>
+        @BLOG_PAGES@
+
+        <script>
+            function showPage(pageId) {
+                // Hide all pages
+                document.querySelectorAll(".page").forEach((page) => {
+                    page.classList.remove("active");
+                });
+
+                // Show the selected page
+                document.getElementById(pageId).classList.add("active");
+            }
+        </script>
+    </body>
 </html>
+
