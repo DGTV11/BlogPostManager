@@ -23,8 +23,8 @@ Usually, its localhost
 ## Home page
 - This page will display all of your blog posts (will be empty at the start).  
   
-To make a new blog post, type a new name for that blogpost in the textbar, "Post title" and click "Create new blog post"  
-After creating your blog post, click on the post name, which will bring you to the editor.  
+- To make a new blog post, type a new name for that blogpost in the textbar, "Post title" and click "Create new blog post"  
+- After creating your blog post, click on the post name, which will bring you to the editor.  
 
 You can access your previous blog posts by clicking the post title.  
 ## Editor page  
