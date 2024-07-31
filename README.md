@@ -7,7 +7,6 @@ This is intended for lazy people like us who want a cool blog but have no time o
 ```sh
 pip3 install -r requirements.txt
 ```
-2) 
 
 ## Usage
 1) From the BlogPostManager folder, run the following command:
@@ -15,5 +14,13 @@ pip3 install -r requirements.txt
 flask --app blog-post-manager/app.py run --host=127.0.0.1
 ```
 
-2) Open whatever url:port thingy was opened up by Flask  
+2) Open whatever url:port link that is opened up by Flask 
 Usually, its localhost
+
+## How to use the application
+1) Home page
+This page will display all of your blog posts (will be empty at the start) 
+To make a new blog post, type a new name for that blogpost in the textbar 
+"Post title" and click "Create new blog post" 
+After creating your blog post, click on the post name, which will brinmg you to the editor
+2) 
