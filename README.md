@@ -26,7 +26,7 @@ Usually, its localhost
 - To make a new blog post, type a new name for that blogpost in the textbar, "Post title" and click "Create new blog post"  
 - After creating your blog post, click on the post name, which will bring you to the editor.  
 
-You can access your previous blog posts by clicking the post title.  
+- You can access your previous blog posts by clicking the post title.  
 ## Editor page  
 - This is the page where you make your blog post. It will have the default description and content.  
 
