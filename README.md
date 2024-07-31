@@ -1,5 +1,5 @@
 # Blog Post Manager
-### 2024 CCT App Development Project
+### 2024 CCT App Dev Project
 ## Description
 This is a blog post manager to help you post, delete, upload and edit your posts on Github Pages using GUI! 
 This is intended for lazy people like us who want a cool blog but have no time or energy to code one themselves!
@@ -44,4 +44,4 @@ to the home page by clicking 'Back to menu'.
 
 ## Credits 
 This application was made by Daniel Wee, Yuan De, Ingo and Hubert
-
+Thanks to Sean and the seniors for helping us with this 
