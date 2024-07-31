@@ -19,7 +19,7 @@ flask --app blog-post-manager/app.py run --host=127.0.0.1
 2) Open the url:port that was opened up by Flask (it's usually `127.0.0.1:5000`)
 Usually, its localhost
 
-## How to use the application
+# How to use the application
 ## Home page
 - This page will display all of your blog posts (will be empty at the start).  
   
