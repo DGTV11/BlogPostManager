@@ -42,5 +42,7 @@ to the home page by clicking 'Back to menu'.
 - There is also a navigation bar that you can input the title and the link reference (href), which will be present in the html file at the top of the blog you made. 
 - If you have finished your blog, you can download it with the 'Export' button on the right side. It will download the HTML file for your whole blog, where you can put it on Github Pages or anywhere you like!
 
-
+## Credits 
+This application was made by Daniel Wee, Yuan De, Ingo and Hubert 2024  
+CCT app dev project
 
