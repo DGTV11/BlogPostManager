@@ -40,7 +40,7 @@ to the home page by clicking 'Back to menu'.
 - If you want to export your posts, click the button 'Export' at the bottom of the home page to go to the export page.  
 - In the 'Blog name' textfield, you can name your blog (NOT the blog posts, but the name for the blog which will have your blogs posts)
 - There is also a navigation bar that you can input the title and the link reference (href), which will be present in the html file at the top of the blog you made. 
-- You can install your blog with the 'Export' button on the right side. It will download the html file for your whole blog, where you can put it on Github Pages or anywhere you like!
+- If you have finished your blog, you can download it with the 'Export' button on the right side. It will download the HTML file for your whole blog, where you can put it on Github Pages or anywhere you like!
 
 
 
