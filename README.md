@@ -27,7 +27,7 @@ To make a new blog post, type a new name for that blogpost in the textbar, "Post
 After creating your blog post, click on the post name, which will bring you to the editor.  
 
 You can access your previous blog posts by clicking the post title.  
-2) Editor page
+2) Editor page  
 This is the page where you make your blog post. It will have the default description and content.  
 
 This page has a markdown editor to allow you to put quotes, italics and much more,  
@@ -36,7 +36,7 @@ as well as having the ability to change the fonts and colour of the text in the 
 Afterward making your blog, click the 'Save' button at the bottom (so you don't lose your post) and you can return  
 to the home page by clicking 'Back to menu'.  
 
-3) Export page
+3) Export page  
 If you want to export your posts, click the button 'Export' at the bottom of the home page.  
 This will bring you to the export page, where you can name your blog, and you can install it with the 'Export' button on the right side  
 This will download the html file for your whole blog, where you can put it on Github Pages or anywhere you like!
