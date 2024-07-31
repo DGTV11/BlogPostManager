@@ -1,4 +1,5 @@
 # Blog Post Manager
+### 2024 CCT App Development Project
 ## Description
 This is a blog post manager to help you post, delete, upload and edit your posts on Github Pages using GUI! 
 This is intended for lazy people like us who want a cool blog but have no time or energy to code one themselves!
@@ -17,7 +18,6 @@ flask --app blog-post-manager/app.py run --host=127.0.0.1
 ```
 
 2) Open the url:port that was opened up by Flask (it's usually `127.0.0.1:5000`)
-Usually, its localhost
 
 # How to use the application
 ## Home page
@@ -43,6 +43,5 @@ to the home page by clicking 'Back to menu'.
 - If you have finished your blog, you can download it with the 'Export' button on the right side. It will download the HTML file for your whole blog, where you can put it on Github Pages or anywhere you like!
 
 ## Credits 
-This application was made by Daniel Wee, Yuan De, Ingo and Hubert 2024  
-CCT app dev project
+This application was made by Daniel Wee, Yuan De, Ingo and Hubert
 
