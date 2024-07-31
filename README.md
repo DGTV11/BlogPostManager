@@ -1,5 +1,7 @@
 # Blog Post Manager
 ## Description
+This is a blog post manager to help you post, delete, upload and edit your posts on Github Pages using GUI! 
+This is intended for lazy people like us who want a cool blog but have no time or energy to code one themselves!
 ## Install
 (TBD)
 ## Usage

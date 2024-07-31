@@ -33,11 +33,6 @@ def get_bp_names_from_bp_ids(ids):
     return bp_names
 
 # Stuff
-@app.route("/info")
-def info():
-    return render_template("info.html")
-
-
 @app.route("/posts/<postid>", methods=("GET", "POST"))
 def posts(postid):  # check GH Project for TODO list (to fix this)
     saved = False
