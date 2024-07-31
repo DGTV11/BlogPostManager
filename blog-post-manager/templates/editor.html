@@ -235,34 +235,7 @@
     </style>
     <script>
         var simplemde = new SimpleMDE({ element: document.getElementById("content") });
-        document.addEventListener("DOMContentLoaded", () => {
-            const links = document.querySelectorAll("a");
-            links.forEach((link) => {
-                link.addEventListener("click", (event) => {
-                    event.preventDefault();
-                    const href = link.getAttribute("href");
-                    document.body.classList.add("page-transition-exit");
-                    setTimeout(() => {
-                        window.location.href = href;
-                    }, 500);
-                });
-            });
-        });
 
-        window.addEventListener("pageshow", (event) => {
-            if (event.persisted) {
-                document.body.classList.remove("page-transition-exit-active");
-                document.body.classList.add("page-transition-enter");
-                requestAnimationFrame(() => {
-                    document.body.classList.add("page-transition-enter-active");
-                });
-            }
-        });
-
-        document.body.classList.add("page-transition-enter");
-        requestAnimationFrame(() => {
-            document.body.classList.add("page-transition-enter-active");
-        });
     </script>
 </html>
 
