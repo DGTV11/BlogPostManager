@@ -27,12 +27,13 @@
             margin-right: 0;
             font-weight: bold; /* Bold like <h3> */
             text-decoration: underline; /* Add underline */
-            color: blue; /* Signature blue color for links */
+            color: CornflowerBlue; /* Signature blue color for links */
             cursor: pointer; /* Pointer cursor for interactivity */
         }
 
         a.h3-a:hover {
-            color: darkblue; /* Darker blue on hover */
+            color: blue; /* Darker blue on hover */
+            transform: scale(1.05);
         }
 
         a.h3-a:visited {
@@ -43,10 +44,19 @@
             outline: 2px solid blue; /* Focus outline for accessibility */
         }
 
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+        a {
+            text-decoration: none;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        button a {
+            color: white;
+        }
+
+        @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: "Roboto", sans-serif;
             background-color: #2b2b2b;
             color: #d1d1d1;
             margin: 0;
@@ -54,18 +64,28 @@
             transition: background-color 0.3s, color 0.3s;
         }
 
-        form {
-            margin: 20px auto;
+        h1,
+        h2 {
+            text-align: left;
+            color: #f1f1f1;
+            margin-left: 20px;
+        }
+
+        div, section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px;
             padding: 20px;
             background-color: #3a3a3a;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             border-radius: 8px;
-            transition: box-shadow 0.3s;
-            max-width: 600px;
+            transition: box-shadow 0.3s, transform 0.3s;
         }
 
-        form:hover {
+        section:hover {
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+            transform: scale(1.01);
         }
 
         label {
@@ -73,12 +93,11 @@
             margin-bottom: 5px;
         }
 
-        input[name="title"],
         input[type="text"],
         textarea,
         select {
-            width: 25%;
-            max-width: 500px;
+            width: 30%;
+            max-width: 500x;
             padding: 10px;
             margin: 10px 0;
             border: 1px solid #555;
@@ -88,7 +107,6 @@
             transition: background-color 0.3s, border-color 0.3s, transform 0.3s;
         }
 
-        input[name="title"]:focus,
         input[type="text"]:focus,
         textarea:focus,
         select:focus {
@@ -97,30 +115,8 @@
             transform: scale(1.01);
         }
 
-          input[type="color"] {
-              -webkit-appearance: none;
-              -moz-appearance: none;
-              appearance: none;
-              width: 50px;
-              height: 30px;
-              border: none;
-              border-radius: 4px;
-              cursor: pointer;
-              margin: 10px 0;
-              padding: 0;
-          }
-
-          input[type="color"]::-webkit-color-swatch-wrapper {
-              padding: 0;
-              border-radius: 4px;
-          }
-
-          input[type="color"]::-webkit-color-swatch {
-              border: none;
-              border-radius: 4px;
-          }
-
-        input[type="submit"], button {
+        input[type="submit"],
+        button {
             background-color: #555;
             color: white;
             padding: 10px 20px;
@@ -130,47 +126,14 @@
             transition: background-color 0.3s, transform 0.3s;
         }
 
-        input[type="submit"]:hover, button:hover {
+        input[type="submit"]:hover,
+        button:hover {
             background-color: #777;
             transform: scale(1.05);
         }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        button a {
-            color: white;
-        }
-
-        .editor-toolbar, .CodeMirror, .editor-statusbar {
-            background-color: #444 !important;
-            color: #ddd !important;
-            border: 1px solid #555 !important;
-            transition: color 0.3s;
-        }
-
-        .editor-preview, .editor-preview-side {
-            background-color: #444 !important;
-            color: {{ font_color }} !important;
-            font-family: {{ font_fonty_font_font }}, system-ui !important;
-        }
-
-        .CodeMirror-scroll {
-            background-color: #444 !important;
-            color: #ddd !important;
-        }
-
-        .editor-toolbar a {
-            color: #ddd !important;
-            background-color: #444 !important;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        .editor-toolbar a:hover {
-            color: #444 !important;
-            background-color: #ddd !important;
+        .material-symbols-outlined {
+            font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
         }
 
         .delete-icon {
@@ -208,7 +171,7 @@
             transform: translateY(20px);
             transition: opacity 0.5s, transform 0.5s;
         }
-        
+
         @STYLES@
     </style>
 </head>
