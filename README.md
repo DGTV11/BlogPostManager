@@ -21,22 +21,22 @@ Usually, its localhost
 
 ## How to use the application
 ## Home page
-This page will display all of your blog posts (will be empty at the start).  
+- This page will display all of your blog posts (will be empty at the start).  
   
 To make a new blog post, type a new name for that blogpost in the textbar, "Post title" and click "Create new blog post"  
 After creating your blog post, click on the post name, which will bring you to the editor.  
 
 You can access your previous blog posts by clicking the post title.  
 ## Editor page  
-This is the page where you make your blog post. It will have the default description and content.  
+- This is the page where you make your blog post. It will have the default description and content.  
 
-This page has a markdown editor to allow you to put quotes, italics and much more,  
+- This page has a markdown editor to allow you to put quotes, italics and much more,  
 as well as having the ability to change the fonts and colour of the text in the post.  
 
-Afterward making your blog, click the 'Save' button at the bottom (so you don't lose your post) and you can return  
+- Afterward making your blog, click the 'Save' button at the bottom (so you don't lose your post) and you can return  
 to the home page by clicking 'Back to menu'.  
 
 ## Export page  
-If you want to export your posts, click the button 'Export' at the bottom of the home page.  
-This will bring you to the export page, where you can name your blog, and you can install it with the 'Export' button on the right side  
-This will download the html file for your whole blog, where you can put it on Github Pages or anywhere you like!
+- If you want to export your posts, click the button 'Export' at the bottom of the home page.  
+- This will bring you to the export page, where you can name your blog, and you can install it with the 'Export' button on the right side  
+It will download the html file for your whole blog, where you can put it on Github Pages or anywhere you like!
