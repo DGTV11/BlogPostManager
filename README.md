@@ -39,4 +39,4 @@ to the home page by clicking 'Back to menu'.
 ## Export page  
 - If you want to export your posts, click the button 'Export' at the bottom of the home page.  
 - This will bring you to the export page, where you can name your blog, and you can install it with the 'Export' button on the right side  
-It will download the html file for your whole blog, where you can put it on Github Pages or anywhere you like!
+- It will download the html file for your whole blog, where you can put it on Github Pages or anywhere you like!
