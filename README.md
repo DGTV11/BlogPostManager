@@ -44,5 +44,6 @@ to the home page by clicking 'Back to menu'.
 
 ## Credits 
 This application was made by Daniel Wee, Yuan De, Ingo and Hubert 2024  
-CCT app dev project
+The application was made for the AppDev project 2024 for CCT  
+Thanks to Sean and the seniors for helping us with this 
 
