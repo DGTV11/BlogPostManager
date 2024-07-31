@@ -26,7 +26,7 @@
             margin-left: 0;
             margin-right: 0;
             font-weight: bold; /* Bold like <h3> */
-            text-decoration: underline; /* Add underline */
+            text-decoration: none; /* No underline or other stuff */
             color: CornflowerBlue; /* Signature blue color for links */
             cursor: pointer; /* Pointer cursor for interactivity */
         }
@@ -148,28 +148,6 @@
 
         button {
             margin: 20px;
-        }
-
-        .page-transition-enter {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        .page-transition-enter-active {
-            opacity: 1;
-            transform: translateY(0);
-            transition: opacity 0.5s, transform 0.5s;
-        }
-
-        .page-transition-exit {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .page-transition-exit-active {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s, transform 0.5s;
         }
 
         @STYLES@
