@@ -17,19 +17,7 @@
                 margin: 20px;
                 color: #d1d1d1;
             }
-            form {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                margin: 20px;
-                padding: 20px;
-                background-color: #3a3a3a;
-                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-                border-radius: 8px;
-                transition: box-shadow 0.3s, transform 0.3s;
-            }
-            form div {
-                flex-grow: 3;
+            form, div {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
@@ -104,8 +92,27 @@
                     <label for="blog_name">Blog name</label>
                     <input id="blog_name" name="blog_name" type="text" />
                 </div>
+                <br>
                 <input name="btn" type="submit" value="Export" />
             </form>
+            <div>
+                {% for link_name, link_href in link_names_n_hrefs.items() %}
+                <form method="post">
+                    <p>{{link_name}}: {{link_href}}</p>
+                    <input type="hidden" name="link_name" value="{{link_name}}" />
+                    <input type="submit" name="btn" value="Delete navbar link" />
+                </form>
+                {% endfor %}
+                <form class="make-post" method="post">
+                    <div>
+                        <label for="title">Navbar link title</label>
+                        <input type="text" name="title" value="{{request.form['title']}}" />
+                        <label for="href">Navbar link href</label>
+                        <input type="text" name="href" value="{{request.form['href']}}" />
+                    </div>
+                    <input type="submit" name="btn" value="Create new navbar link" />
+                </form>
+            </div>
             <button><a href="/">Back to menu</a></button>
         </body>
     </head>

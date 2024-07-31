@@ -103,8 +103,11 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
 
     return render_template("editor.html", post_name=postname, post_desc=postdesc, post_content=postcontent, font_color=font_color, font_fonty_font_font=font)
 
+other_navbar_links = {}
 @app.route("/export", methods=("GET", "POST"))
 def export():
+    global other_navbar_links #disgusting but oh well
+
     if request.method == "POST":
          match request.form["btn"]:
             case "Export":
@@ -136,14 +139,32 @@ def export():
                     links_to_blog_posts += f'<section><a class="h3-a" onClick="showPage(\'{blog_post_id}\')">{blog_post_name}</a><p>{blog_post_description}</p></section>\n'
                     blog_pages += f'<div id="{blog_post_id}" class="page"><h1>{blog_post_name}</h2><h3>{blog_post_description}</h3><p style="{blog_post_style}">{blog_post_content}</p></div>\n'
 
-                export_html = EXPORT_TEMPLATE_TXT.replace("@BLOGNAME@", request.form["blog_name"]).replace("@LINKS_TO_BLOG_POSTS@", links_to_blog_posts).replace("@BLOG_PAGES@", blog_pages)
+                right_navbar_links = ""
+                for link_name, link_href in other_navbar_links.items():
+                    right_navbar_links += f'<a class="h3-a right-nav" href="{link_name}">{link_name}</a>'
+
+                export_html = EXPORT_TEMPLATE_TXT.replace("@BLOGNAME@", request.form["blog_name"]).replace("@LINKS_TO_BLOG_POSTS@", links_to_blog_posts).replace("@BLOG_PAGES@", blog_pages).replace('@RIGHT_NAV@', right_navbar_links)
 
                 with open(os.path.join(os.path.dirname(__file__), 'tmp', 'blog.html'), 'w+') as f:
                     f.write(export_html)
 
                 return send_file(os.path.join(os.path.dirname(__file__), 'tmp', 'blog.html'), as_attachment=True)
+            case "Create new navbar link":
+                title = request.form["title"].strip()
+                href = request.form["href"].strip()
+                if not title:
+                    flash("Title is required!")
+                elif title in other_navbar_links:
+                    flash("Title must be unique!")
+                elif not href:
+                    flash("Href is required!")
+                else:
+                    other_navbar_links[title] = href
+            case "Delete navbar link":
+                post_name = request.form["link_name"]
+                del other_navbar_links[post_name]
 
-    return render_template("export.html")
+    return render_template("export.html", link_names_n_hrefs=other_navbar_links)
 
 # Main
 
@@ -152,34 +173,34 @@ def main():
     if request.method == "POST": # CREATES NEW POST
         match request.form["btn"]:
             case "Create new blog post":
-                title = request.form["title"]
-                if title == "":
+                title = request.form["title"].strip()
+                if not title:
                     flash("Title is required!")
-
-                post_id = f"{uuid4().hex}0{uuid4().hex}"
-                while post_id in list_blog_post_ids():
+                else:
                     post_id = f"{uuid4().hex}0{uuid4().hex}"
+                    while post_id in list_blog_post_ids():
+                        post_id = f"{uuid4().hex}0{uuid4().hex}"
 
-                blog_post_folder_path = os.path.join(os.path.dirname(__file__), "blog-posts", post_id)
-                os.mkdir(blog_post_folder_path)
+                    blog_post_folder_path = os.path.join(os.path.dirname(__file__), "blog-posts", post_id)
+                    os.mkdir(blog_post_folder_path)
 
-                with open(os.path.join(blog_post_folder_path, "config.ini"), 'w') as f:
-                    config = configparser.ConfigParser()
-                    config['NAME'] = {'post_name': title}
-                    config['EDITOR'] = {'isAdvancedMode': False}
-                    config.write(f)
+                    with open(os.path.join(blog_post_folder_path, "config.ini"), 'w') as f:
+                        config = configparser.ConfigParser()
+                        config['NAME'] = {'post_name': title}
+                        config['EDITOR'] = {'isAdvancedMode': False}
+                        config.write(f)
 
-                with open(os.path.join(blog_post_folder_path, "content.txt"), 'w+') as f:
-                    f.write('## Hello, world!')
+                    with open(os.path.join(blog_post_folder_path, "content.txt"), 'w+') as f:
+                        f.write('## Hello, world!')
 
-                with open(os.path.join(blog_post_folder_path, "description.txt"), 'w+') as f:
-                    f.write('Insert description here')
+                    with open(os.path.join(blog_post_folder_path, "description.txt"), 'w+') as f:
+                        f.write('Insert description here')
 
-                # initialise styles.ini (create it in same directory as config.ini and content.txt) with DEFAULT styles, add persistence to BASIC style editor (convert GUI stuffs to css file also plz add `system-ui` font and support for google fonts)
-                with open(os.path.join(blog_post_folder_path, "styles.ini"), 'w') as f:
-                    config = configparser.ConfigParser()
-                    config['STYLES'] = {'font_color': '#000000', 'font': 'system-ui'}
-                    config.write(f)
+                    # initialise styles.ini (create it in same directory as config.ini and content.txt) with DEFAULT styles, add persistence to BASIC style editor (convert GUI stuffs to css file also plz add `system-ui` font and support for google fonts)
+                    with open(os.path.join(blog_post_folder_path, "styles.ini"), 'w') as f:
+                        config = configparser.ConfigParser()
+                        config['STYLES'] = {'font_color': '#000000', 'font': 'system-ui'}
+                        config.write(f)
 
             case "Delete post": # DELETES POST
                 post_id = request.form["pst_id"]

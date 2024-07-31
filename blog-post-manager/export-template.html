@@ -49,6 +49,10 @@
             transition: color 0.3s, transform 0.3s;
         }
 
+        a.right-nav {
+            justify-self: end;
+        }
+
         button a {
             color: white;
         }
@@ -157,6 +161,7 @@
     <body>
         <div>
             <a class="h3-a" onClick="showPage('home')">@BLOGNAME@</a>
+            @RIGHT_NAV@
         </div>
 
         <div id="home" class="page active">
