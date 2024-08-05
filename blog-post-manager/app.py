@@ -153,7 +153,9 @@ def export():
                 title = request.form["title"].strip()
                 href = request.form["href"].strip()
                 if not title:
+                    print(1)
                     flash("Title is required!")
+ 
                 elif title in other_navbar_links:
                     flash("Title must be unique!")
                 elif not href:
