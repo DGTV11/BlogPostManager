@@ -177,7 +177,7 @@ def main():
             case "Create new blog post":
                 title = request.form["title"].strip()
                 if not title:
-                    flash("Title is required!")
+                    flash("Blog post name is required!")
                 else:
                     post_id = f"{uuid4().hex}0{uuid4().hex}"
                     while post_id in list_blog_post_ids():
