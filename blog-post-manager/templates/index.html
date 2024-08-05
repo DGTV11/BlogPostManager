@@ -137,9 +137,7 @@
         <h1>Blog Post Manager</h1>
         {% with messages = get_flashed_messages() %}
         {% if messages %}
-            <ul class=flashes>
-                <p style="color:#FF0000">{{ messages[-1] }}</p>
-            </ul>
+          <p style="color:#FF0000">{{ messages[-1] }}</p>
         {% endif %}
         {% endwith %}
         <div>
