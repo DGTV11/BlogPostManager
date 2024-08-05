@@ -2,7 +2,7 @@ from glob import glob
 from uuid import uuid4
 import os, configparser, shutil
 
-from flask import Flask, url_for, request, render_template, abort, flash, send_file
+from flask import Flask, url_for, request, render_template, abort, send_file
 from markupsafe import escape
 
 import markdown
@@ -11,8 +11,6 @@ with open(os.path.join(os.path.dirname(__file__), "export-template.html"), 'r') 
     EXPORT_TEMPLATE_TXT = f.read()
 
 app = Flask(__name__)
-app.config["SECRET_KEY"] = "aslkjhlhkjfdsalkjhfdsha" #tks sean
-
 
 def list_blog_post_ids():
     blog_post_filepaths = glob(
@@ -107,75 +105,82 @@ other_navbar_links = {}
 @app.route("/export", methods=("GET", "POST"))
 def export():
     global other_navbar_links #disgusting but oh well
+    
+    message = None
 
     if request.method == "POST":
          match request.form["btn"]:
             case "Export":
-                all_blog_post_ids = list_blog_post_ids()
-                all_blog_post_names = get_bp_names_from_bp_ids(all_blog_post_ids)
-                all_blog_post_descriptions = []
-                all_blog_post_contents = []
-                all_blog_post_styles = []
+                if not request.form["blog_name"].strip():
+                     message = "Blog name is required!"
+                else:
+                    all_blog_post_ids = list_blog_post_ids()
+                    all_blog_post_names = get_bp_names_from_bp_ids(all_blog_post_ids)
+                    all_blog_post_descriptions = []
+                    all_blog_post_contents = []
+                    all_blog_post_styles = []
 
-                for blog_post_id in all_blog_post_ids:
-                    blog_post_folder_path = os.path.join(os.path.dirname(__file__), "blog-posts", blog_post_id)
+                    for blog_post_id in all_blog_post_ids:
+                        blog_post_folder_path = os.path.join(os.path.dirname(__file__), "blog-posts", blog_post_id)
 
-                    with open(os.path.join(blog_post_folder_path, "description.txt"), 'r') as f:
-                        all_blog_post_descriptions.append(f.read())
+                        with open(os.path.join(blog_post_folder_path, "description.txt"), 'r') as f:
+                            all_blog_post_descriptions.append(f.read())
 
-                    with open(os.path.join(blog_post_folder_path, "content.txt"), 'r') as f:
-                        all_blog_post_contents.append(markdown.markdown(f.read()))
+                        with open(os.path.join(blog_post_folder_path, "content.txt"), 'r') as f:
+                            all_blog_post_contents.append(markdown.markdown(f.read()))
 
-                    config = configparser.ConfigParser()
-                    config.read(os.path.join(blog_post_folder_path, "styles.ini"))
-                    font_color = config['STYLES']['font_color']
-                    font = config['STYLES']['font']
-                    all_blog_post_styles.append(f"color: {font_color}; font-family: {font}, system-ui;")
+                        config = configparser.ConfigParser()
+                        config.read(os.path.join(blog_post_folder_path, "styles.ini"))
+                        font_color = config['STYLES']['font_color']
+                        font = config['STYLES']['font']
+                        all_blog_post_styles.append(f"color: {font_color}; font-family: {font}, system-ui;")
 
-                links_to_blog_posts = ""
-                blog_pages = ""
-                styles = ""
-                for blog_post_id, blog_post_name, blog_post_description, blog_post_content, blog_post_style in zip(all_blog_post_ids, all_blog_post_names, all_blog_post_descriptions, all_blog_post_contents, all_blog_post_styles):
-                    links_to_blog_posts += f'<section><a class="h3-a" onClick="showPage(\'{blog_post_id}\')">{blog_post_name}</a><p>{blog_post_description}</p></section>\n'
-                    blog_pages += f'<div id="{blog_post_id}" class="page"><h1>{blog_post_name}</h2><h3>{blog_post_description}</h3><p style="{blog_post_style}">{blog_post_content}</p></div>\n'
+                    links_to_blog_posts = ""
+                    blog_pages = ""
+                    styles = ""
+                    for blog_post_id, blog_post_name, blog_post_description, blog_post_content, blog_post_style in zip(all_blog_post_ids, all_blog_post_names, all_blog_post_descriptions, all_blog_post_contents, all_blog_post_styles):
+                        links_to_blog_posts += f'<section><a class="h3-a" onClick="showPage(\'{blog_post_id}\')">{blog_post_name}</a><p>{blog_post_description}</p></section>\n'
+                        blog_pages += f'<div id="{blog_post_id}" class="page"><h1>{blog_post_name}</h2><h3>{blog_post_description}</h3><p style="{blog_post_style}">{blog_post_content}</p></div>\n'
 
-                right_navbar_links = ""
-                for link_name, link_href in other_navbar_links.items():
-                    right_navbar_links += f'<a class="h3-a right-nav" href="{link_name}">{link_name}</a>'
+                    right_navbar_links = ""
+                    for link_name, link_href in other_navbar_links.items():
+                        right_navbar_links += f'<a class="h3-a right-nav" href="{link_name}">{link_name}</a>'
 
-                export_html = EXPORT_TEMPLATE_TXT.replace("@BLOGNAME@", request.form["blog_name"]).replace("@LINKS_TO_BLOG_POSTS@", links_to_blog_posts).replace("@BLOG_PAGES@", blog_pages).replace('@RIGHT_NAV@', right_navbar_links)
+                    export_html = EXPORT_TEMPLATE_TXT.replace("@BLOGNAME@", request.form["blog_name"].strip()).replace("@LINKS_TO_BLOG_POSTS@", links_to_blog_posts).replace("@BLOG_PAGES@", blog_pages).replace('@RIGHT_NAV@', right_navbar_links)
 
-                with open(os.path.join(os.path.dirname(__file__), 'tmp', 'blog.html'), 'w+') as f:
-                    f.write(export_html)
+                    with open(os.path.join(os.path.dirname(__file__), 'tmp', 'blog.html'), 'w+') as f:
+                        f.write(export_html)
 
-                return send_file(os.path.join(os.path.dirname(__file__), 'tmp', 'blog.html'), as_attachment=True)
+                    return send_file(os.path.join(os.path.dirname(__file__), 'tmp', 'blog.html'), as_attachment=True)
             case "Create new navbar link":
                 title = request.form["title"].strip()
                 href = request.form["href"].strip()
                 if not title:
-                    flash("Title is required!")
+                    message = "Navbar link title is required!"
                 elif title in other_navbar_links:
-                    flash("Title must be unique!")
+                    message = "Navbar link title must be unique!"
                 elif not href:
-                    flash("Href is required!")
+                    message = "Navbar href is required!"
                 else:
                     other_navbar_links[title] = href
             case "Delete navbar link":
                 post_name = request.form["link_name"]
                 del other_navbar_links[post_name]
 
-    return render_template("export.html", link_names_n_hrefs=other_navbar_links)
+    return render_template("export.html", link_names_n_hrefs=other_navbar_links, message=message)
 
 # Main
 
 @app.route("/", methods=("GET", "POST"))
 def main():
+    message = None
+
     if request.method == "POST": # CREATES NEW POST
         match request.form["btn"]:
             case "Create new blog post":
                 title = request.form["title"].strip()
                 if not title:
-                    flash("Title is required!")
+                    message = "Title is required!"
                 else:
                     post_id = f"{uuid4().hex}0{uuid4().hex}"
                     while post_id in list_blog_post_ids():
@@ -209,7 +214,7 @@ def main():
                 )
 
     all_blog_post_ids = list_blog_post_ids()
-    return render_template("index.html", post_ids_n_names={id: name for id, name in zip(all_blog_post_ids, get_bp_names_from_bp_ids(all_blog_post_ids))})
+    return render_template("index.html", post_ids_n_names={id: name for id, name in zip(all_blog_post_ids, get_bp_names_from_bp_ids(all_blog_post_ids))}, message=message)
 
 
 if __name__ == "__main__":

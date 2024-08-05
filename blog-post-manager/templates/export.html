@@ -60,81 +60,87 @@
         }
         input[type="text"],
         textarea,
-        select {
-            width: 100%;
-            max-width: 500px;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #555;
-            border-radius: 4px;
-            background-color: #444;
-            color: #ddd;
-            transition: background-color 0.3s, border-color 0.3s, transform 0.3s;
-        }
-        input[type="text"]:focus,
-        textarea:focus,
-        select:focus {
-            border-color: #6a6a6a;
-            background-color: #363636;
-            transform: scale(1.01);
-        }
-        input[type="submit"],
-        button {
-            background-color: #555;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
-        }
-        input[type="submit"]:hover,
-        button:hover {
-            background-color: #777;
-            transform: scale(1.05);
-        }
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-        button a {
-            color: white;
-        }
-        button {
-            margin: 20px;
-        }
-    </style>
-</head>
-<body>
-    <h1>Export Blog Posts</h1>
-    <div class="form-container">
-        <form method="post">
-            <div>
-                <label for="blog_name">Blog name</label>
-                <input id="blog_name" name="blog_name" type="text" />
-            </div>
-            <input name="btn" type="submit" value="Export" />
-        </form>
-    </div>
-    <div class="root-div">
-        {% for link_name, link_href in link_names_n_hrefs.items() %}
-        <form method="post">
-            <p>{{link_name}}: {{link_href}}</p>
-            <input type="hidden" name="link_name" value="{{link_name}}" />
-            <input type="submit" name="btn" value="Delete navbar link" />
-        </form>
-        {% endfor %}
-        <form class="make-post" method="post">
-            <div>
-                <label for="title">Navbar link title</label>
-                <input type="text" name="title" value="{{request.form['title']}}" />
-                <label for="href">Navbar link href</label>
-                <input type="text" name="href" value="{{request.form['href']}}" />
-            </div>
-            <input type="submit" name="btn" value="Create new navbar link" />
-        </form>
-    </div>
-    <button><a href="/">Back to menu</a></button>
+          select {
+              width: 100%;
+              max-width: 500px;
+              padding: 10px;
+              margin: 10px 0;
+              border: 1px solid #555;
+              border-radius: 4px;
+              background-color: #444;
+              color: #ddd;
+              transition: background-color 0.3s, border-color 0.3s, transform 0.3s;
+          }
+          input[type="text"]:focus,
+          textarea:focus,
+          select:focus {
+              border-color: #6a6a6a;
+              background-color: #363636;
+              transform: scale(1.01);
+          }
+          input[type="submit"],
+          button {
+              background-color: #555;
+              color: white;
+              padding: 10px 20px;
+              border: none;
+              border-radius: 4px;
+              cursor: pointer;
+              transition: background-color 0.3s, transform 0.3s;
+          }
+          input[type="submit"]:hover,
+          button:hover {
+              background-color: #777;
+              transform: scale(1.05);
+          }
+          a {
+              text-decoration: none;
+              color: inherit;
+          }
+          button a {
+              color: white;
+          }
+          button {
+              margin: 20px;
+          }
+      </style>
+  </head>
+  <body>
+      <h1>Export Blog Posts</h1>
+      <div class="form-container">
+          <form method="post">
+              <div>
+                  <label for="blog_name">Blog name</label>
+                  <input id="blog_name" name="blog_name" type="text" />
+              </div>
+              <input name="btn" type="submit" value="Export" />
+          </form>
+      </div>
+      <div class="root-div">
+          {% for link_name, link_href in link_names_n_hrefs.items() %}
+          <form method="post">
+              <p>{{link_name}}: {{link_href}}</p>
+              <input type="hidden" name="link_name" value="{{link_name}}" />
+              <input type="submit" name="btn" value="Delete navbar link" />
+          </form>
+          {% endfor %}
+          <form class="make-post" method="post">
+              <div>
+                  <label for="title">Navbar link title</label>
+                  <input type="text" name="title" value="{{request.form['title']}}" />
+                  <label for="href">Navbar link href</label>
+                  <input type="text" name="href" value="{{request.form['href']}}" />
+              </div>
+              <input type="submit" name="btn" value="Create new navbar link" />
+          </form>
+      </div>
+      <button><a href="/">Back to menu</a></button>
+
+      {% if message %}
+          <script>
+            alert("{{ message }}");
+          </script>
+      {% endif %}
 </body>
 </html>
 

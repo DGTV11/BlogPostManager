@@ -154,5 +154,10 @@
         <br />
         <button><a href="{{url_for('export')}}">Export</a></button>
     </body>
+    {% if message %}
+      <script>
+        alert("{{ message }}");
+      </script>
+    {% endif %}
 </html>
 
