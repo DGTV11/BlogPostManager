@@ -45,7 +45,7 @@
                 margin: 10px 0;
                 border: 1px solid #555;
                 border-radius: 4px;
-                background-color: #444;
+                background-color: {{ bg_color }};
                 color: #ddd;
                 transition: background-color 0.3s, border-color 0.3s, transform 0.3s;
             }
@@ -107,31 +107,31 @@
             }
 
             .editor-toolbar, .CodeMirror, .editor-statusbar {
-                background-color: #444 !important;
+                background-color: {{ bg_color }} !important;
                 color: #ddd !important;
                 border: 1px solid #555 !important;
                 transition: color 0.3s;
             }
 
             .editor-preview, .editor-preview-side {
-                background-color: #444 !important;
+                background-color: {{ bg_color }} !important;
                 color: {{ font_color }} !important;
                 font-family: {{ font_fonty_font_font }}, system-ui !important;
             }
 
             .CodeMirror-scroll {
-                background-color: #444 !important;
+                background-color: {{ bg_color }} !important;
                 color: #ddd !important;
             }
 
             .editor-toolbar a {
                 color: #ddd !important;
-                background-color: #444 !important;
+                background-color: {{ bg_color }} !important;
                 transition: background-color 0.3s, color 0.3s;
             }
 
             .editor-toolbar a:hover {
-                color: #444 !important;
+                color: {{ bg_color }} !important;
                 background-color: #ddd !important;
             }
 
@@ -165,6 +165,9 @@
             <label for="font-color">Font Color:</label>
             <input type="color" id="font-color" name="font-color" value="{{ font_color }}" />
 
+            <label for="background-color">Background Color:</label>
+            <input type="color" id="background-color" name="background-color" value="{{ bg_color }}" />
+
             <label for="font">Font:</label>
             <select id="font" name="font">
                 {% if font_fonty_font_font == "system-ui" %}
@@ -195,7 +198,7 @@
             <input name="btn" type="submit" value="Save" />
             <button><a href="/">Back to menu</a></button>
             {% if saved %}
-            <p style="color: green;">Successfully saved!</p>
+            <p style="color: limegreen;">Successfully saved!</p>
             {% endif %}
         </form>
     </body>
