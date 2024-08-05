@@ -135,7 +135,13 @@
     </head>
     <body>
         <h1>Blog Post Manager</h1>
-        <h2>Blog Posts</h2>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class=flashes>
+                <p style="color:#FF0000">{{ messages[-1] }}</p>
+            </ul>
+        {% endif %}
+        {% endwith %}
         <div>
           {% for pst_id, pst_name in post_ids_n_names.items() %}
           <form method="post">
@@ -154,10 +160,5 @@
         <br />
         <button><a href="{{url_for('export')}}">Export</a></button>
     </body>
-    {% if message %}
-      <script>
-        alert("{{ message }}");
-      </script>
-    {% endif %}
 </html>
 

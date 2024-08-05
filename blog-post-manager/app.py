@@ -2,7 +2,7 @@ from glob import glob
 from uuid import uuid4
 import os, configparser, shutil
 
-from flask import Flask, url_for, request, render_template, abort, send_file
+from flask import Flask, url_for, request, render_template, abort, send_file, flash
 from markupsafe import escape
 
 import markdown
@@ -11,6 +11,7 @@ with open(os.path.join(os.path.dirname(__file__), "export-template.html"), 'r') 
     EXPORT_TEMPLATE_TXT = f.read()
 
 app = Flask(__name__)
+app.config["SECRET_KEY"] = "aslkjhlhkjfdsalkjhfdsha"
 
 def list_blog_post_ids():
     blog_post_filepaths = glob(
@@ -106,13 +107,11 @@ other_navbar_links = {}
 def export():
     global other_navbar_links #disgusting but oh well
     
-    message = None
-
     if request.method == "POST":
          match request.form["btn"]:
             case "Export":
                 if not request.form["blog_name"].strip():
-                     message = "Blog name is required!"
+                     flash("Blog name is required!")
                 else:
                     all_blog_post_ids = list_blog_post_ids()
                     all_blog_post_names = get_bp_names_from_bp_ids(all_blog_post_ids)
@@ -156,31 +155,30 @@ def export():
                 title = request.form["title"].strip()
                 href = request.form["href"].strip()
                 if not title:
-                    message = "Navbar link title is required!"
+                    flash("Navbar link title is required!")
+ 
                 elif title in other_navbar_links:
-                    message = "Navbar link title must be unique!"
+                    flash("Navbar link title must be unique!")
                 elif not href:
-                    message = "Navbar href is required!"
+                    flash("Navbar href is required!")
                 else:
                     other_navbar_links[title] = href
             case "Delete navbar link":
                 post_name = request.form["link_name"]
                 del other_navbar_links[post_name]
 
-    return render_template("export.html", link_names_n_hrefs=other_navbar_links, message=message)
+    return render_template("export.html", link_names_n_hrefs=other_navbar_links)
 
 # Main
 
 @app.route("/", methods=("GET", "POST"))
 def main():
-    message = None
-
     if request.method == "POST": # CREATES NEW POST
         match request.form["btn"]:
             case "Create new blog post":
                 title = request.form["title"].strip()
                 if not title:
-                    message = "Title is required!"
+                    flash("Title is required!")
                 else:
                     post_id = f"{uuid4().hex}0{uuid4().hex}"
                     while post_id in list_blog_post_ids():
@@ -214,7 +212,7 @@ def main():
                 )
 
     all_blog_post_ids = list_blog_post_ids()
-    return render_template("index.html", post_ids_n_names={id: name for id, name in zip(all_blog_post_ids, get_bp_names_from_bp_ids(all_blog_post_ids))}, message=message)
+    return render_template("index.html", post_ids_n_names={id: name for id, name in zip(all_blog_post_ids, get_bp_names_from_bp_ids(all_blog_post_ids))})
 
 
 if __name__ == "__main__":

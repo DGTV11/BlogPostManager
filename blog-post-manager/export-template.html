@@ -1,47 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@BLOGNAME@</title>
+
     <style>
         body {
             font-family: Arial, sans-serif;
         }
+
         .page {
             display: none;
         }
+
         .active {
             display: block;
         }
+
         nav {
             margin-bottom: 20px;
         }
 
         a.h3-a {
             display: block;
-            font-size: 1.17em; /* Size similar to <h3> */
+            font-size: 1.17em;
+            /* Size similar to <h3> */
             margin-top: 1em;
             margin-bottom: 1em;
             margin-left: 0;
             margin-right: 0;
-            font-weight: bold; /* Bold like <h3> */
-            text-decoration: none; /* No underline or other stuff */
-            color: CornflowerBlue; /* Signature blue color for links */
-            cursor: pointer; /* Pointer cursor for interactivity */
+            font-weight: bold;
+            /* Bold like <h3> */
+            text-decoration: none;
+            /* No underline or other stuff */
+            color: CornflowerBlue;
+            /* Signature blue color for links */
+            cursor: pointer;
+            /* Pointer cursor for interactivity */
         }
 
         a.h3-a:hover {
-            color: DeepSkyBlue; /* Darker blue on hover */
+            color: DeepSkyBlue;
+            /* Darker blue on hover */
             transform: scale(1.05);
         }
 
         a.h3-a:visited {
-            color: purple; /* Purple color for visited links */
+            color: purple;
+            /* Purple color for visited links */
         }
 
         a.h3-a:focus {
-            outline: 2px solid blue; /* Focus outline for accessibility */
+            outline: 2px solid blue;
+            /* Focus outline for accessibility */
         }
 
         a {
@@ -75,7 +88,8 @@
             margin-left: 20px;
         }
 
-        div, section {
+        div,
+        section {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -157,30 +171,40 @@
         @STYLES@
     </style>
 </head>
+
 <body>
-    <body>
-        <div>
-            <a class="h3-a" onClick="showPage('home')">@BLOGNAME@</a>
-            @RIGHT_NAV@
-        </div>
+    <div>
+        <a class="h3-a" onClick="showPage('home')">@BLOGNAME@</a>
+        @RIGHT_NAV@
+    </div>
 
-        <div id="home" class="page active">
-            <h1>@BLOGNAME@</h1>
-            @LINKS_TO_BLOG_POSTS@
-        </div>
+    <div id="home" class="page active">
+        <h1>@BLOGNAME@</h1>
+        @LINKS_TO_BLOG_POSTS@
+    </div>
 
-        @BLOG_PAGES@
+    @BLOG_PAGES@
 
-        <script>
-            function showPage(pageId) {
-                // Hide all pages
-                document.querySelectorAll(".page").forEach((page) => {
-                    page.classList.remove("active");
-                });
+    <script>
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll(".page").forEach((page) => {
+                page.classList.remove("active");
+            });
 
-                // Show the selected page
-                document.getElementById(pageId).classList.add("active");
-            }
-        </script>
-    </body>
+            // Show the selected page
+            document.getElementById(pageId).classList.add("active");
+        }
+    </script>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class=flashes>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+</body>
+
 </html>

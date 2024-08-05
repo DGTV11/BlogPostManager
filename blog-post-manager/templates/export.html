@@ -107,6 +107,13 @@
   </head>
   <body>
       <h1>Export Blog Posts</h1>
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+          <ul class=flashes>
+              <p style="color:#FF0000">{{ messages[-1] }}</p>
+          </ul>
+      {% endif %}
+      {% endwith %}
       <div class="form-container">
           <form method="post">
               <div>
@@ -141,6 +148,6 @@
             alert("{{ message }}");
           </script>
       {% endif %}
-</body>
+  </body>
 </html>
 
