@@ -136,6 +136,15 @@
     <body>
         <h1>Blog Post Manager</h1>
         <h2>Blog Posts</h2>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class=flashes>
+            {% for message in messages %}
+                <h1><li style="color:#FF0000">{{ message }}</li></h1>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        {% endwith %}
         <div>
           {% for pst_id, pst_name in post_ids_n_names.items() %}
           <form method="post">
