@@ -143,7 +143,7 @@ def export():
 
                     right_navbar_links = ""
                     for link_name, link_href in other_navbar_links.items():
-                        right_navbar_links += f'<a class="h3-a right-nav" href="{link_name}">{link_name}</a>'
+                        right_navbar_links += f'<a class="h3-a right-nav" href="{link_href}">{link_name}</a>'
 
                     export_html = EXPORT_TEMPLATE_TXT.replace("@BLOGNAME@", request.form["blog_name"].strip()).replace("@LINKS_TO_BLOG_POSTS@", links_to_blog_posts).replace("@BLOG_PAGES@", blog_pages).replace('@RIGHT_NAV@', right_navbar_links)
 
