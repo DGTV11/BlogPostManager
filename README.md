@@ -44,4 +44,5 @@ to the home page by clicking 'Back to menu'.
 
 ## Credits 
 This application was made by Daniel Wee, Yuan De, Ingo and Hubert ~~, and ChatGPT and Mistral AI~~
+
 Thanks to Sean and our seniors for helping us with this 

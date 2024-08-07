@@ -4,7 +4,6 @@ import os, configparser, shutil
 
 from flask import Flask, url_for, request, render_template, abort, send_file, flash
 from markupsafe import escape
-
 import markdown
 
 with open(os.path.join(os.path.dirname(__file__), "export-template.html"), 'r') as f:
