@@ -1,64 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@BLOGNAME@</title>
+
     <style>
         body {
             font-family: Arial, sans-serif;
-        }
-        .page {
-            display: none;
-        }
-        .active {
-            display: block;
-        }
-        nav {
-            margin-bottom: 20px;
-        }
-
-        a.h3-a {
-            display: block;
-            font-size: 1.17em; /* Size similar to <h3> */
-            margin-top: 1em;
-            margin-bottom: 1em;
-            margin-left: 0;
-            margin-right: 0;
-            font-weight: bold; /* Bold like <h3> */
-            text-decoration: none; /* No underline or other stuff */
-            color: CornflowerBlue; /* Signature blue color for links */
-            cursor: pointer; /* Pointer cursor for interactivity */
-        }
-
-        a.h3-a:hover {
-            color: DeepSkyBlue; /* Darker blue on hover */
-            transform: scale(1.05);
-        }
-
-        a.h3-a:visited {
-            color: purple; /* Purple color for visited links */
-        }
-
-        a.h3-a:focus {
-            outline: 2px solid blue; /* Focus outline for accessibility */
-        }
-
-        a {
-            text-decoration: none;
-            transition: color 0.3s, transform 0.3s;
-        }
-
-        button a {
-            color: white;
-        }
-
-        @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
-
-        body {
-            font-family: "Roboto", sans-serif;
-            background-color: #2b2b2b;
-            color: #d1d1d1;
+            background-color: #f7f7f7;
+            color: #333;
             margin: 0;
             padding: 0;
             transition: background-color 0.3s, color 0.3s;
@@ -67,20 +19,26 @@
         h1,
         h2 {
             text-align: left;
-            color: #f1f1f1;
+            color: #333;
             margin-left: 20px;
         }
 
-        div, section {
+        div,
+        section {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin: 20px;
             padding: 20px;
-            background-color: #3a3a3a;
+            background-color: #fff;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             border-radius: 8px;
             transition: box-shadow 0.3s, transform 0.3s;
+        }
+
+        #home > section {
+            flex-direction: column;
+            align-items: start;
         }
 
         section:hover {
@@ -100,25 +58,25 @@
             max-width: 500x;
             padding: 10px;
             margin: 10px 0;
-            border: 1px solid #555;
+            border: 1px solid #ccc;
             border-radius: 4px;
-            background-color: #444;
-            color: #ddd;
+            background-color: #fff;
+            color: #333;
             transition: background-color 0.3s, border-color 0.3s, transform 0.3s;
         }
 
         input[type="text"]:focus,
         textarea:focus,
         select:focus {
-            border-color: #6a6a6a;
-            background-color: #363636;
+            border-color: #666;
+            background-color: #f0f0f0;
             transform: scale(1.01);
         }
 
         input[type="submit"],
         button {
-            background-color: #555;
-            color: white;
+            background-color: #fff;
+            color: #333;
             padding: 10px 20px;
             border: none;
             border-radius: 4px;
@@ -128,7 +86,7 @@
 
         input[type="submit"]:hover,
         button:hover {
-            background-color: #777;
+            background-color: #ccc;
             transform: scale(1.05);
         }
 
@@ -139,11 +97,11 @@
         .delete-icon {
             cursor: pointer;
             transition: color 0.3s;
-            color: #ff6666;
+            color: #666;
         }
 
         .delete-icon:hover {
-            color: #ff0000;
+            color: #333;
         }
 
         button {
@@ -153,29 +111,31 @@
         @STYLES@
     </style>
 </head>
+
 <body>
-    <body>
-        <div>
-            <a class="h3-a" onClick="showPage('home')">@BLOGNAME@</a>
-        </div>
+    <div>
+        <a class="h3-a" onClick="showPage('home')">@BLOGNAME@</a>
+        @RIGHT_NAV@
+    </div>
 
-        <div id="home" class="page active">
-            <h1>@BLOGNAME@</h1>
-            @LINKS_TO_BLOG_POSTS@
-        </div>
+    <div id="home" class="page active">
+        <h1>@BLOGNAME@</h1>
+        @LINKS_TO_BLOG_POSTS@
+    </div>
 
-        @BLOG_PAGES@
+    @BLOG_PAGES@
 
-        <script>
-            function showPage(pageId) {
-                // Hide all pages
-                document.querySelectorAll(".page").forEach((page) => {
-                    page.classList.remove("active");
-                });
+    <script>
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll(".page").forEach((page) => {
+                page.classList.remove("active");
+            });
 
-                // Show the selected page
-                document.getElementById(pageId).classList.add("active");
-            }
-        </script>
-    </body>
+            // Show the selected page
+            document.getElementById(pageId).classList.add("active");
+        }
+    </script>
+</body>
+
 </html>

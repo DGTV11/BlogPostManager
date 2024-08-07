@@ -6,9 +6,6 @@ from flask import Flask, url_for, request, render_template, abort, send_file, fl
 from markupsafe import escape
 import markdown
 
-with open(os.path.join(os.path.dirname(__file__), "export-template.html"), 'r') as f:
-    EXPORT_TEMPLATE_TXT = f.read()
-
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "aslkjhlhkjfdsalkjhfdsha"
 
@@ -149,7 +146,10 @@ def export():
                     for link_name, link_href in other_navbar_links.items():
                         right_navbar_links += f'<a class="h3-a right-nav" href="{link_href}">{link_name}</a>'
 
-                    export_html = EXPORT_TEMPLATE_TXT.replace("@BLOGNAME@", request.form["blog_name"].strip()).replace("@LINKS_TO_BLOG_POSTS@", links_to_blog_posts).replace("@BLOG_PAGES@", blog_pages).replace('@RIGHT_NAV@', right_navbar_links)
+                    with open(os.path.join(os.path.dirname(__file__), f"export-template-{'dark' if request.form['dark_mode'] else 'light'}.html"), 'r') as f:
+                        export_template_txt = f.read()
+
+                    export_html = export_template_txt.replace("@BLOGNAME@", request.form["blog_name"].strip()).replace("@LINKS_TO_BLOG_POSTS@", links_to_blog_posts).replace("@BLOG_PAGES@", blog_pages).replace('@RIGHT_NAV@', right_navbar_links)
 
                     with open(os.path.join(os.path.dirname(__file__), 'tmp', 'blog.html'), 'w+') as f:
                         f.write(export_html)
