@@ -101,13 +101,22 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
 
     return render_template("editor.html", post_name=postname, post_desc=postdesc, post_content=postcontent, font_color=font_color, bg_color=background_color, font_fonty_font_font=font)
 
+@app.route("/namecard", methods=("GET", "POST"))
+def namecard():
+    if request.method == "POST":
+        match request.form["btn"]:
+            case "Save":
+                pass
+
+    return render_template("namecard.html")
+
 other_navbar_links = {}
 @app.route("/export", methods=("GET", "POST"))
 def export():
     global other_navbar_links #disgusting but oh well
     
     if request.method == "POST":
-         match request.form["btn"]:
+        match request.form["btn"]:
             case "Export":
                 if not request.form["blog_name"].strip():
                      flash("Blog name is required!")
