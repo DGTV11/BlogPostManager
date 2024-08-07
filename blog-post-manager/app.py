@@ -146,7 +146,8 @@ def export():
                     for link_name, link_href in other_navbar_links.items():
                         right_navbar_links += f'<a class="h3-a right-nav" href="{link_href}">{link_name}</a>'
 
-                    with open(os.path.join(os.path.dirname(__file__), f"export-template-{'dark' if request.form['dark_mode'] else 'light'}.html"), 'r') as f:
+                    export_template_fp = os.path.join(os.path.dirname(__file__), f"export-template-{'dark' if request.form.get('dark_mode') else 'light'}.html")
+                    with open(export_template_fp, 'r') as f:
                         export_template_txt = f.read()
 
                     export_html = export_template_txt.replace("@BLOGNAME@", request.form["blog_name"].strip()).replace("@LINKS_TO_BLOG_POSTS@", links_to_blog_posts).replace("@BLOG_PAGES@", blog_pages).replace('@RIGHT_NAV@', right_navbar_links)
