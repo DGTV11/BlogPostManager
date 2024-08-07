@@ -104,33 +104,11 @@
           <form method="post">
               <div>
                   <div>
-                      <label for="blog_name">Blog name</label>
-                      <input id="blog_name" name="blog_name" type="text" />
-                  </div>
-                  <div>
                       <label for="dark_mode">Dark mode</label>
                       <input type="checkbox" id="dark_mode" name="dark_mode" />
                   </div>
               </div>
               <input name="btn" type="submit" value="Export" />
-          </form>
-      </div>
-      <div class="root-div">
-          {% for link_name, link_href in link_names_n_hrefs.items() %}
-          <form method="post">
-              <p>{{link_name}}: {{link_href}}</p>
-              <input type="hidden" name="link_name" value="{{link_name}}" />
-              <input type="submit" name="btn" value="Delete navbar link" />
-          </form>
-          {% endfor %}
-          <form class="make-post" method="post">
-              <div>
-                  <label for="title">Navbar link title</label>
-                  <input type="text" name="title" value="{{request.form['title']}}" />
-                  <label for="href">Navbar link href</label>
-                  <input type="text" name="href" value="{{request.form['href']}}" />
-              </div>
-              <input type="submit" name="btn" value="Create new navbar link" />
           </form>
       </div>
       <button><a href="/">Back to menu</a></button>
