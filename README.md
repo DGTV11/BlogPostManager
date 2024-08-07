@@ -43,6 +43,6 @@ to the home page by clicking 'Back to menu'.
 - If you have finished your blog, you can download it with the 'Export' button on the right side. It will download the HTML file for your whole blog, where you can put it on Github Pages or anywhere you like!
 
 ## Credits 
-This application was made by Daniel Wee, Yuan De, Ingo and Hubert ~~, and ChatGPT and Mistral AI~~
+This application was made by Daniel Wee, Yuan De, Ingo and Hubert ~~, and ChatGPT, Mistral AI, and DeepSeek Coder-V2~~
 
 Thanks to Sean and our seniors for helping us with this 
