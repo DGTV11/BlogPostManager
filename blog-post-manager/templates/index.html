@@ -135,21 +135,26 @@
     </head>
     <body>
         <h1>Blog Post Manager</h1>
-        <h2>Blog Posts</h2>
-        {% for pst_id, pst_name in post_ids_n_names.items() %}
-        <form method="post">
-            <a href="{{url_for('posts', postid=pst_id)}}">{{pst_name}}</a>
-            <input type="hidden" name="pst_id" value="{{pst_id}}" />
-            <input type="submit" name="btn" value="Delete post" />
-        </form>
-        {% endfor %}
-        <form class="make-post" method="post">
-            <div>
-                <label for="title">Post title</label>
-                <input type="text" name="title" value="{{ request.form['title']}}" />
-            </div>
-            <input type="submit" name="btn" value="Create new blog post" />
-        </form>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <p style="color:#FF0000">{{ messages[-1] }}</p>
+        {% endif %}
+        {% endwith %}
+        <div>
+          {% for pst_id, pst_name in post_ids_n_names.items() %}
+          <form method="post">
+              <a href="{{url_for('posts', postid=pst_id)}}">{{pst_name}}</a>
+              <input type="hidden" name="pst_id" value="{{pst_id}}" />
+              <input type="submit" name="btn" value="Delete post" />
+          </form>
+          {% endfor %}
+          <form method="post">
+              <div>
+                  <label for="title">Post title</label>
+                  <input type="text" name="title" value="{{ request.form['title']}}" />
+              </div>
+              <input type="submit" name="btn" value="Create new blog post" />
+          </form>
         <br />
         <button><a href="{{url_for('export')}}">Export</a></button>
     </body>
