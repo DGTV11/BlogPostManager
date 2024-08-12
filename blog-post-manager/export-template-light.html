@@ -118,6 +118,7 @@
         }
 
         body {
+            display: grid;
             grid-template-areas:
                 "nav nav"
                 "aside article";
@@ -131,11 +132,11 @@
         }
 
         aside {
-            grid-area: aside
+            grid-area: aside;
         }
 
         .page {
-            grid-area: article
+            grid-area: article;
         }
 
         @STYLES@
@@ -153,7 +154,8 @@
         <p>@NCd_COUNTRY@</p>
         <a href="mailto:@NCd_EMAIL@">Email</a>
         <a href="@NCd_WEBSITE@">Website</a>
-        <a href="@NCd_GITHUB@">GitHub</a>    </aside>
+        <a href="@NCd_GITHUB@">GitHub</a>
+    </aside>
 
     <div id="home" class="page active">
         <h1>@BLOGNAME@</h1>
