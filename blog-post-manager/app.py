@@ -119,7 +119,6 @@ def namecard():
                     config = configparser.ConfigParser()
                     config['NAMECARD'] = {"name": request.form["name"], "description": request.form["description"], "country": request.form["country"], "email": request.form["email"]} # following the names
                     config.write(f)
-
                 is_saved = True
 
     config = configparser.ConfigParser()
@@ -129,7 +128,7 @@ def namecard():
     country = config['NAMECARD']['country']
     email = config['NAMECARD']['email']
 
-    return render_template("namecard.html")
+    return render_template("namecard.html", name=name, description=description, country=country, email=email)
 
 other_navbar_links = {}
 @app.route("/export", methods=("GET", "POST"))
