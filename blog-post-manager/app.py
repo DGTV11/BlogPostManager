@@ -103,6 +103,8 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
 
 @app.route("/namecard", methods=("GET", "POST"))
 def namecard():
+    saved = False
+
     namecard_path = os.path.join(os.path.dirname(__file__), "namecard-info.ini") #will go into the same directory as app.py
 
     if not os.path.isfile(namecard_path):
@@ -119,7 +121,7 @@ def namecard():
                     config = configparser.ConfigParser()
                     config['NAMECARD'] = {"name": request.form["name"], "description": request.form["description"], "country": request.form["country"], "email": request.form["email"]} # following the names
                     config.write(f)
-                is_saved = True
+                saved = True
         with open(namecard_path, 'w') as f:
             config = configparser.ConfigParser()
             config['NAMECARD'] = {"Name": request.form["name"], "Description": request.form["description"], "Country": request.form["country"], "email": request.form["email"]} # following the names
@@ -132,7 +134,7 @@ def namecard():
     country = config['NAMECARD']['country']
     email = config['NAMECARD']['email']
 
-    return render_template("namecard.html", name=name, description=description, country=country, email=email)
+    return render_template("namecard.html", saved=saved, name=name, description=description, country=country, email=email)
 
 other_navbar_links = {}
 @app.route("/export", methods=("GET", "POST"))
