@@ -113,8 +113,9 @@ def namecard():
                     config = configparser.ConfigParser()
                     config['NAMECARD'] = {"Name": request.form["name"], "Description": request.form["description"], "Country": request.form["country"], "email": request.form["email"]} # following the names
                     config.write(f)
-
                 is_saved = True
+
+
 
     return render_template("namecard.html")
 
