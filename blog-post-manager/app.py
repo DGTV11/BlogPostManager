@@ -103,10 +103,18 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
 
 @app.route("/namecard", methods=("GET", "POST"))
 def namecard():
+    namecard_path = os.path.join(os.path.dirname(__file__), "namecard-info.ini") #will go into the same directory as app.py
     if request.method == "POST":
+        is_saved = False
         match request.form["btn"]:
             case "Save":
-                pass
+                
+                with open(namecard_path, 'w') as f:
+                    config = configparser.ConfigParser()
+                    config['NAMECARD'] = {}
+                    config.write(f)
+
+                is_saved = True
 
     return render_template("namecard.html")
 
