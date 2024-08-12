@@ -103,6 +103,8 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
 
 @app.route("/namecard", methods=("GET", "POST"))
 def namecard():
+    if not os.path.isfile(namecard_path):
+        
     if request.method == "POST":
         match request.form["btn"]:
             case "Save":
