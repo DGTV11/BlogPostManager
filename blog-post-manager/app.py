@@ -114,7 +114,7 @@ def namecard():
             config.write(f)
 
     if request.method == "POST":
-        is_saved = False
+        saved = False
         match request.form["btn"]:
             case "Save":
                 with open(namecard_path, 'w') as f:
