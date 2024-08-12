@@ -120,6 +120,11 @@ def namecard():
                     config['NAMECARD'] = {"Name": request.form["name"], "Description": request.form["description"], "Country": request.form["country"], "email": request.form["email"]} # following the names
                     config.write(f)
                 is_saved = True
+        with open(namecard_path, 'w') as f:
+            config = configparser.ConfigParser()
+            config['NAMECARD'] = {"Name": request.form["name"], "Description": request.form["description"], "Country": request.form["country"], "email": request.form["email"]} # following the names
+            config.write(f)
+
 
 
 
