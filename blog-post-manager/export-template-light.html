@@ -68,7 +68,7 @@
             margin-left: 20px;
         }
 
-        div, section {
+        div, section, aside {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -80,7 +80,7 @@
             transition: box-shadow 0.3s, transform 0.3s;
         }
 
-        section {
+        section, aside {
           flex-direction: column;
           align-items: flex-start;
         }
@@ -116,7 +116,7 @@
         body {
             grid-template-areas:
                 "nav nav"
-                "aside article"
+                "aside article";
             grid-template-rows: 1fr 3fr;
             grid-template-columns: auto 1fr;
         }

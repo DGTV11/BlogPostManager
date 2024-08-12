@@ -149,59 +149,63 @@ def export():
                 if not request.form["blog_name"].strip():
                      flash("Blog name is required!")
                 else:
-                    all_blog_post_ids = list_blog_post_ids()
-                    all_blog_post_names = get_bp_names_from_bp_ids(all_blog_post_ids)
-                    all_blog_post_descriptions = []
-                    all_blog_post_contents = []
-                    all_blog_post_styles = []
-
-                    for blog_post_id in all_blog_post_ids:
-                        blog_post_folder_path = os.path.join(os.path.dirname(__file__), "blog-posts", blog_post_id)
-
-                        with open(os.path.join(blog_post_folder_path, "description.txt"), 'r') as f:
-                            all_blog_post_descriptions.append(f.read())
-
-                        with open(os.path.join(blog_post_folder_path, "content.txt"), 'r') as f:
-                            all_blog_post_contents.append(markdown.markdown(f.read()))
-
+                    namecard_path = os.path.join(os.path.dirname(__file__), "namecard-info.ini")
+                    if not os.path.isfile(namecard_path):
+                        flash("Namecard is required!")
+                    else:
                         config = configparser.ConfigParser()
-                        config.read(os.path.join(blog_post_folder_path, "styles.ini"))
-                        font_color = config['STYLES']['font_color']
-                        background_color = config['STYLES']['background_color']
-                        font = config['STYLES']['font']
+                        config.read(namecard_path)
+                        ncd_name = config['NAMECARD']['name']
+                        ncd_description = config['NAMECARD']['description']
+                        ncd_country = config['NAMECARD']['country']
+                        ncd_email = config['NAMECARD']['email']
+                        ncd_website = config['NAMECARD']['website']
+                        ncd_github = config['NAMECARD']['github']
 
-                        all_blog_post_styles.append(f"color: {font_color}; background-color: {background_color}; font-family: {font}, system-ui;")
+                        all_blog_post_ids = list_blog_post_ids()
+                        all_blog_post_names = get_bp_names_from_bp_ids(all_blog_post_ids)
+                        all_blog_post_descriptions = []
+                        all_blog_post_contents = []
+                        all_blog_post_styles = []
 
-                    links_to_blog_posts = ""
-                    blog_pages = ""
-                    styles = ""
-                    for blog_post_id, blog_post_name, blog_post_description, blog_post_content, blog_post_style in zip(all_blog_post_ids, all_blog_post_names, all_blog_post_descriptions, all_blog_post_contents, all_blog_post_styles):
-                        links_to_blog_posts += f'<section><a class="h3-a" onClick="showPage(\'{blog_post_id}\')">{blog_post_name}</a><p>{blog_post_description}</p></section>\n'
-                        blog_pages += f'<div id="{blog_post_id}" class="page" style="{blog_post_style}"><h1>{blog_post_name}</h2><h3>{blog_post_description}</h3>{blog_post_content}</div>\n'
+                        for blog_post_id in all_blog_post_ids:
+                            blog_post_folder_path = os.path.join(os.path.dirname(__file__), "blog-posts", blog_post_id)
 
-                    right_navbar_links = ""
-                    for link_name, link_href in other_navbar_links.items():
-                        right_navbar_links += f'<a class="h3-a right-nav" href="{link_href}">{link_name}</a>'
+                            with open(os.path.join(blog_post_folder_path, "description.txt"), 'r') as f:
+                                all_blog_post_descriptions.append(f.read())
 
-                    export_template_fp = os.path.join(os.path.dirname(__file__), f"export-template-{'dark' if request.form.get('dark_mode') else 'light'}.html")
-                    with open(export_template_fp, 'r') as f:
-                        export_template_txt = f.read()
+                            with open(os.path.join(blog_post_folder_path, "content.txt"), 'r') as f:
+                                all_blog_post_contents.append(markdown.markdown(f.read()))
 
-                    config = configparser.ConfigParser()
-                    config.read(os.path.join(os.path.dirname(__file__), "namecard-info.ini"))
-                    ncd_name = config['NAMECARD']['name']
-                    ncd_description = config['NAMECARD']['description']
-                    ncd_country = config['NAMECARD']['country']
-                    ncd_email = config['NAMECARD']['email']
-                    ncd_website = config['NAMECARD']['website']
-                    ncd_github = config['NAMECARD']['github']
+                            config = configparser.ConfigParser()
+                            config.read(os.path.join(blog_post_folder_path, "styles.ini"))
+                            font_color = config['STYLES']['font_color']
+                            background_color = config['STYLES']['background_color']
+                            font = config['STYLES']['font']
 
-                    export_html = export_template_txt.replace("@BLOGNAME@", request.form["blog_name"].strip()).replace("@LINKS_TO_BLOG_POSTS@", links_to_blog_posts).replace("@BLOG_PAGES@", blog_pages).replace('@RIGHT_NAV@', right_navbar_links).replace('@NCd_NAME@', ncd_name).replace('@NCd_DESC@', ncd_description).replace('@NCd_COUNTRY@', ncd_country).replace('@NCd_EMAIL@', ncd_email).replace('@NCd_WEBSITE@', ncd_website).replace('@NCd_GITHUB@', ncd_github)
+                            all_blog_post_styles.append(f"color: {font_color}; background-color: {background_color}; font-family: {font}, system-ui;")
 
-                    with open(os.path.join(os.path.dirname(__file__), 'tmp', 'blog.html'), 'w+') as f:
-                        f.write(export_html)
+                        links_to_blog_posts = ""
+                        blog_pages = ""
+                        styles = ""
+                        for blog_post_id, blog_post_name, blog_post_description, blog_post_content, blog_post_style in zip(all_blog_post_ids, all_blog_post_names, all_blog_post_descriptions, all_blog_post_contents, all_blog_post_styles):
+                            links_to_blog_posts += f'<section><a class="h3-a" onClick="showPage(\'{blog_post_id}\')">{blog_post_name}</a><p>{blog_post_description}</p></section>\n'
+                            blog_pages += f'<div id="{blog_post_id}" class="page" style="{blog_post_style}"><h1>{blog_post_name}</h2><h3>{blog_post_description}</h3>{blog_post_content}</div>\n'
 
-                    return send_file(os.path.join(os.path.dirname(__file__), 'tmp', 'blog.html'), as_attachment=True)
+                        right_navbar_links = ""
+                        for link_name, link_href in other_navbar_links.items():
+                            right_navbar_links += f'<a class="h3-a right-nav" href="{link_href}">{link_name}</a>'
+
+                        export_template_fp = os.path.join(os.path.dirname(__file__), f"export-template-{'dark' if request.form.get('dark_mode') else 'light'}.html")
+                        with open(export_template_fp, 'r') as f:
+                            export_template_txt = f.read()
+
+                        export_html = export_template_txt.replace("@BLOGNAME@", request.form["blog_name"].strip()).replace("@LINKS_TO_BLOG_POSTS@", links_to_blog_posts).replace("@BLOG_PAGES@", blog_pages).replace('@RIGHT_NAV@', right_navbar_links).replace('@NCd_NAME@', ncd_name).replace('@NCd_DESC@', ncd_description).replace('@NCd_COUNTRY@', ncd_country).replace('@NCd_EMAIL@', ncd_email).replace('@NCd_WEBSITE@', ncd_website).replace('@NCd_GITHUB@', ncd_github)
+
+                        with open(os.path.join(os.path.dirname(__file__), 'tmp', 'blog.html'), 'w+') as f:
+                            f.write(export_html)
+
+                        return send_file(os.path.join(os.path.dirname(__file__), 'tmp', 'blog.html'), as_attachment=True)
             case "Create new navbar link":
                 title = request.form["title"].strip()
                 href = request.form["href"].strip()
