@@ -112,14 +112,14 @@ def namecard():
             config.write(f)
 
     if request.method == "POST":
-        is_saved = False
+        saved = False
         match request.form["btn"]:
             case "Save":
                 with open(namecard_path, 'w') as f:
                     config = configparser.ConfigParser()
                     config['NAMECARD'] = {"name": request.form["name"], "description": request.form["description"], "country": request.form["country"], "email": request.form["email"]} # following the names
                     config.write(f)
-                is_saved = True
+                saved = True
         with open(namecard_path, 'w') as f:
             config = configparser.ConfigParser()
             config['NAMECARD'] = {"Name": request.form["name"], "Description": request.form["description"], "Country": request.form["country"], "email": request.form["email"]} # following the names
