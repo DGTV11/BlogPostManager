@@ -28,16 +28,16 @@
             cursor: pointer; /* Pointer cursor for interactivity */
         }
 
-        a.h3-a:hover {
+        a.h3-a:hover, .namecard-link:hover {
             color: DeepSkyBlue; /* Darker blue on hover */
             transform: scale(1.05);
         }
 
-        a.h3-a:visited {
+        a.h3-a:visited, .namecard-link:visited {
             color: purple; /* Purple color for visited links */
         }
 
-        a.h3-a:focus {
+        a.h3-a:focus, .namecard-link:focus {
             outline: 2px solid blue; /* Focus outline for accessibility */
         }
 
@@ -147,6 +147,9 @@
         <h1>@NCd_NAME@</h1>
         <p>@NCd_DESC@</p>
         <p>@NCd_COUNTRY@</p>
+        <a class="namecard-link" href="mailto:@NCd_EMAIL@">Email</a>
+        <a class="namecard-link" href="@NCd_WEBSITE@">Website</a>
+        <a class="namecard-link" href="@NCd_GITHUB@">GitHub</a>
         <h3><a href="mailto:@NCd_EMAIL@">Email</a></h3>
         <h3><a href="@NCd_WEBSITE@">Website</a></h3>
         <h3><a href="@NCd_GITHUB@">GitHub</a></h3>
