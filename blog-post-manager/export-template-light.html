@@ -14,9 +14,6 @@
         .active {
             display: block;
         }
-        nav {
-            margin-bottom: 20px;
-        }
 
         a.h3-a {
             display: block;
@@ -155,33 +152,57 @@
             margin: 20px;
         }
 
+        body {
+            grid-template-areas:
+                "nav nav"
+                "aside article"
+            grid-template-rows: 1fr 3fr;
+            grid-template-columns: auto 1fr;
+        }
+
+        .navbar {
+            margin-bottom: 20px;
+            grid-area: nav;
+        }
+
+        aside {
+            grid-area: aside
+        }
+
+        .page {
+            grid-area: article
+        }
+
         @STYLES@
     </style>
 </head>
 <body>
-    <body>
-        <div>
-            <a class="h3-a" onClick="showPage('home')">@BLOGNAME@</a>
-            @RIGHT_NAV@
-        </div>
+    <div class="navbar">
+        <a class="h3-a" onClick="showPage('home')">@BLOGNAME@</a>
+        @RIGHT_NAV@
+    </div>
 
-        <div id="home" class="page active">
-            <h1>@BLOGNAME@</h1>
-            @LINKS_TO_BLOG_POSTS@
-        </div>
+    <aside>
+      
+    </aside>
 
-        @BLOG_PAGES@
+    <div id="home" class="page active">
+        <h1>@BLOGNAME@</h1>
+        @LINKS_TO_BLOG_POSTS@
+    </div>
 
-        <script>
-            function showPage(pageId) {
-                // Hide all pages
-                document.querySelectorAll(".page").forEach((page) => {
-                    page.classList.remove("active");
-                });
+    @BLOG_PAGES@
 
-                // Show the selected page
-                document.getElementById(pageId).classList.add("active");
-            }
-        </script>
-    </body>
+    <script>
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll(".page").forEach((page) => {
+                page.classList.remove("active");
+            });
+
+            // Show the selected page
+            document.getElementById(pageId).classList.add("active");
+        }
+    </script>
+</body>
 </html>
