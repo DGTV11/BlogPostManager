@@ -117,10 +117,17 @@ def namecard():
             case "Save":
                 with open(namecard_path, 'w') as f:
                     config = configparser.ConfigParser()
-                    config['NAMECARD'] = {"Name": request.form["name"], "Description": request.form["description"], "Country": request.form["country"], "email": request.form["email"]} # following the names
+                    config['NAMECARD'] = {"name": request.form["name"], "description": request.form["description"], "country": request.form["country"], "email": request.form["email"]} # following the names
                     config.write(f)
 
                 is_saved = True
+
+    config = configparser.ConfigParser()
+    config.read(namecard_path)
+    name = config['NAMECARD']['name']
+    description = config['NAMECARD']['description']
+    country = config['NAMECARD']['country']
+    email = config['NAMECARD']['email']
 
     return render_template("namecard.html")
 

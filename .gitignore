@@ -266,3 +266,5 @@ blog-post-manager/blog-posts/*
 
 blog-post-manager/tmp/*
 !blog-post-manager/tmp/.gitkeep
+
+blog-post-manager/namecard-info.ini
