@@ -110,7 +110,7 @@ def namecard():
     if not os.path.isfile(namecard_path):
         with open(namecard_path, 'w') as f:
             config = configparser.ConfigParser()
-            config['NAMECARD'] = {"Name": "Placeholder McPlaceholder", "Description": "Tell the readers more about yourself", "Country": "Your country", "email": "example@example.com"}
+            config['NAMECARD'] = {"Name": "Placeholder McPlaceholder", "Description": "Tell the readers more about yourself", "Country": "Your country", "email": "example@example.com", "website": "https://example.example.com", "github": "https://github.com/DGTV11"}
             config.write(f)
 
     if request.method == "POST":
@@ -124,7 +124,7 @@ def namecard():
                 saved = True
         with open(namecard_path, 'w') as f:
             config = configparser.ConfigParser()
-            config['NAMECARD'] = {"Name": request.form["name"], "Description": request.form["description"], "Country": request.form["country"], "email": request.form["email"]} # following the names
+            config['NAMECARD'] = {"Name": request.form["name"], "Description": request.form["description"], "Country": request.form["country"], "email": request.form["email"], "website": request.form["website"], "github": request.form["github"]} # following the names
             config.write(f)
 
     config = configparser.ConfigParser()
@@ -133,8 +133,10 @@ def namecard():
     description = config['NAMECARD']['description']
     country = config['NAMECARD']['country']
     email = config['NAMECARD']['email']
+    website = config['NAMECARD']['website']
+    github = config['NAMECARD']['github']
 
-    return render_template("namecard.html", saved=saved, name=name, description=description, country=country, email=email)
+    return render_template("namecard.html", saved=saved, name=name, description=description, country=country, email=email, website=website, github=github)
 
 other_navbar_links = {}
 @app.route("/export", methods=("GET", "POST"))
@@ -185,7 +187,16 @@ def export():
                     with open(export_template_fp, 'r') as f:
                         export_template_txt = f.read()
 
-                    export_html = export_template_txt.replace("@BLOGNAME@", request.form["blog_name"].strip()).replace("@LINKS_TO_BLOG_POSTS@", links_to_blog_posts).replace("@BLOG_PAGES@", blog_pages).replace('@RIGHT_NAV@', right_navbar_links)
+                    config = configparser.ConfigParser()
+                    config.read(os.path.join(os.path.dirname(__file__), "namecard-info.ini"))
+                    ncd_name = config['NAMECARD']['name']
+                    ncd_description = config['NAMECARD']['description']
+                    ncd_country = config['NAMECARD']['country']
+                    ncd_email = config['NAMECARD']['email']
+                    ncd_website = config['NAMECARD']['website']
+                    ncd_github = config['NAMECARD']['github']
+
+                    export_html = export_template_txt.replace("@BLOGNAME@", request.form["blog_name"].strip()).replace("@LINKS_TO_BLOG_POSTS@", links_to_blog_posts).replace("@BLOG_PAGES@", blog_pages).replace('@RIGHT_NAV@', right_navbar_links).replace('@NCd_NAME@', ncd_name).replace('@NCd_DESC@', ncd_description).replace('@NCd_COUNTRY@', ncd_country).replace('@NCd_EMAIL@', ncd_email).replace('@NCd_WEBSITE@', ncd_website).replace('@NCd_GITHUB@', ncd_github)
 
                     with open(os.path.join(os.path.dirname(__file__), 'tmp', 'blog.html'), 'w+') as f:
                         f.write(export_html)
