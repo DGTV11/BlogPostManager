@@ -27,6 +27,7 @@ flask --app blog-post-manager/app.py run --host=127.0.0.1
 - After creating your blog post, click on the post name, which will bring you to the editor.  
 
 - You can access your previous blog posts by clicking the post title.  
+- This page also has a button to go to the namecard page, which we will talk about more in detail. 
 ## Editor page  
 - This is the page where you make your blog post. It will have the default description and content.  
 
@@ -41,6 +42,9 @@ to the home page by clicking 'Back to menu'.
 - In the 'Blog name' textfield, you can name your blog (NOT the blog posts, but the name for the blog which will have your blogs posts)
 - There is also a navigation bar that you can input the title and the link reference (href), which will be present in the html file at the top of the blog you made. 
 - If you have finished your blog, you can download it with the 'Export' button on the right side. It will download the HTML file for your whole blog, where you can put it on Github Pages or anywhere you like!
+
+## Namecard page
+- This page will request for your name, description (of yourself), country and email! This info abpout yourself will be shown when you exporrt your blog so people can learn more about you. 
 
 ## Credits 
 This application was made by Daniel Wee, Yuan De, Ingo and Hubert ~~, and ChatGPT, Mistral AI, and DeepSeek Coder-V2~~
