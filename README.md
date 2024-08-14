@@ -1,9 +1,10 @@
 # Blog Post Manager
 ### 2024 CCT App Dev Project
 ## Description
-This is a blog post manager to help you post, delete, upload and edit your posts on Github Pages using GUI! 
-This is intended for lazy people like us who want a cool blog but have no time or energy to code one themselves!
-## Installing
+This is a blog post manager to help you post, delete, upload and edit your posts on Github Pages using a simple-ish website. 
+This is intended for lazy people like us who want a cool blog but have no time or energy to code one themselves.
+
+## Install
 1) Install Python 3 and pip
 
 2) From the BlogPostManager folder, install Python dependencies
@@ -24,7 +25,7 @@ python3 -m flask --app blog-post-manager/app.py run --host=127.0.0.1
 
 2) Open the url:port that was opened up by Flask (it's usually `127.0.0.1:5000`)
 
-# How to use the application
+# Guide
 ## Home page
 - This page will display all of your blog posts (will be empty at the start).  
   
@@ -54,4 +55,4 @@ to the home page by clicking 'Back to menu'.
 ## Credits 
 This application was made by Daniel Wee, Yuan De, Ingo and Hubert ~~, and ChatGPT, Mistral AI, DeepSeek Coder, and other Ollama models and platforms I am WAY too lazy to name-V2~~
 
-Thanks to Sean and our seniors for helping us with this 
+We would like to thank our seniors in the ACS(I) Coding Competition Team for guiding us in the creation of this application.
