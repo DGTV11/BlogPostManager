@@ -12,9 +12,14 @@ pip3 install -r requirements.txt
 ```
 
 ## Usage
-1) From the BlogPostManager folder, run the following command:
+1) From the BlogPostManager folder, run the following:
 ```sh
 flask --app blog-post-manager/app.py run --host=127.0.0.1
+```
+
+If you can't use the standalone flask command, run the following instead:
+```sh
+python3 -m flask --app blog-post-manager/app.py run --host=127.0.0.1
 ```
 
 2) Open the url:port that was opened up by Flask (it's usually `127.0.0.1:5000`)
