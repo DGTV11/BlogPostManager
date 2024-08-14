@@ -260,7 +260,7 @@ def main():
                         config['STYLES'] = {'font_color': '#000000', 'background_color': '#444444', 'font': 'system-ui'}
                         config.write(f)
 
-            case "Delete post": # DELETES POST
+            case "": # DELETES POST
                 post_id = request.form["pst_id"]
                 shutil.rmtree(
                     os.path.join(os.path.dirname(__file__), "blog-posts", post_id)
