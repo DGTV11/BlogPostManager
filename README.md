@@ -52,6 +52,6 @@ to the home page by clicking 'Back to menu'.
 - This page will request for your name, description (of yourself), country and email! This info abpout yourself will be shown when you exporrt your blog so people can learn more about you. 
 
 ## Credits 
-This application was made by Daniel Wee, Yuan De, Ingo and Hubert ~~, and ChatGPT, Mistral AI, and DeepSeek Coder-V2~~
+This application was made by Daniel Wee, Yuan De, Ingo and Hubert ~~, and ChatGPT, Mistral AI, DeepSeek Coder, and other Ollama models and platforms I am WAY too lazy to name-V2~~
 
 Thanks to Sean and our seniors for helping us with this 

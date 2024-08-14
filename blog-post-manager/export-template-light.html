@@ -84,6 +84,11 @@
             transition: box-shadow 0.3s, transform 0.3s;
         }
 
+        div {
+            word-break: break-all; 
+            hyphens: auto;
+        }
+
         section, aside {
           flex-direction: column;
           align-items: flex-start;
@@ -125,9 +130,9 @@
             display: grid;
             grid-template-areas:
                 "nav nav"
-                "aside article";
+                ". article";
             grid-template-rows: auto 1fr;
-            grid-template-columns: 1fr 3fr;
+            grid-template-columns: 1fr minmax(0, 3fr);
         }
 
         .navbar {
@@ -136,7 +141,8 @@
         }
 
         aside {
-            grid-area: aside;
+            position: fixed;
+            margin-top: 10em;
         }
 
         .page {
