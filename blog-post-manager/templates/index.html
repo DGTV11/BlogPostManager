@@ -82,7 +82,7 @@
                 transform: scale(1.01);
             }
 
-            input[type="submit"],
+            input[type="submit"]:not(.delbut),
             button {
                 background-color: #555;
                 color: white;
@@ -93,11 +93,31 @@
                 transition: background-color 0.3s, transform 0.3s;
             }
 
-            input[type="submit"]:hover,
+            input[type="submit"]:not(.delbut):hover,
             button:hover {
                 background-color: #777;
                 transform: scale(1.05);
             }
+
+            .delbut {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 30px; /* Adjusted size to better fit the icon */
+    height: 30px; /* Adjusted size to better fit the icon */
+    border: none;
+    cursor: pointer;
+    background-color: transparent; /* Ensure no background color */
+    background-image: url('https://img.icons8.com/?size=100&id=nerFBdXcYDve&format=png&color=ff0000'); /* Make sure this URL is correct and accessible */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: transform 0.3s;
+}
+
+.delbut:hover {
+    transform: scale(1.1); /* Slightly increase size on hover */
+}
 
             a {
                 text-decoration: none;
@@ -145,7 +165,7 @@
           <form method="post">
               <a href="{{url_for('posts', postid=pst_id)}}">{{pst_name}}</a>
               <input type="hidden" name="pst_id" value="{{pst_id}}" />
-              <input type="submit" name="btn" value="Delete post" />
+              <input class="delbut" type="submit" name="btn" value=""></input>
           </form>
           {% endfor %}
           <form method="post">
