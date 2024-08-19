@@ -196,8 +196,8 @@
             <br />
             <br />
             <input name="btn" type="submit" value="Save" />
-            {% if saved %}
-            <p style="color: limegreen;">Successfully saved!</p>
+            {% if save_date %}
+            <p style="color: limegreen;">Successfully saved on {{ save_date }}!</p>
             {% endif %}
         </form>
 

@@ -30,7 +30,7 @@ def get_bp_names_from_bp_ids(ids):
 # Stuff
 @app.route("/posts/<postid>", methods=("GET", "POST"))
 def posts(postid):  # check GH Project for TODO list (to fix this)
-    saved = False
+    save_date = None
     if postid not in list_blog_post_ids():
         abort(404)  # TODO: make error page more user-friendly
 
@@ -43,6 +43,8 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
 
         match request.form["btn"]:
             case "Save":
+                today = str(date.today())
+
                 config = configparser.ConfigParser()
                 config.read(os.path.join(blog_post_folder_path, "config.ini"))
                 isAdvancedMode = config['EDITOR']['isAdvancedMode']
@@ -51,7 +53,7 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
                     config = configparser.ConfigParser()
                     config['NAME'] = {'post_name': request.form['title']}
                     config['EDITOR'] = {'isAdvancedMode': isAdvancedMode}
-                    config['DATE'] = {'date': str(date.today())}
+                    config['DATE'] = {'date': today}
                     config.write(f)
 
                 with open(os.path.join(blog_post_folder_path, "content.txt"), 'w') as f:
@@ -65,7 +67,7 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
                     config['STYLES'] = {'font_color': font_color, 'background_color': background_color, 'font': font}
                     config.write(f)
 
-                saved = True
+                save_date = today
         # The part to reload the stuff back
         config = configparser.ConfigParser()
         config.read(os.path.join(blog_post_folder_path, "styles.ini"))
@@ -81,7 +83,7 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
 
         with open(os.path.join(blog_post_folder_path, "description.txt"), "r") as f:
             postdesc = f.read()   
-        return render_template('editor.html', saved=saved, postid=postid, post_name=postname, post_desc=postdesc, post_content=postcontent, font_color=font_color, bg_color=background_color, font_fonty_font_font=font)
+        return render_template('editor.html', save_date=save_date, postid=postid, post_name=postname, post_desc=postdesc, post_content=postcontent, font_color=font_color, bg_color=background_color, font_fonty_font_font=font)
         #Apologies, a bit disgusting but well a cool tiny detail no one will notice has been added!
         
     config = configparser.ConfigParser()
