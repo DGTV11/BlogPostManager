@@ -167,12 +167,16 @@ def export():
 
                         all_blog_post_ids = list_blog_post_ids()
                         all_blog_post_names = get_bp_names_from_bp_ids(all_blog_post_ids)
+                        all_blog_post_dates = []
                         all_blog_post_descriptions = []
                         all_blog_post_contents = []
                         all_blog_post_styles = []
 
                         for blog_post_id in all_blog_post_ids:
                             blog_post_folder_path = os.path.join(os.path.dirname(__file__), "blog-posts", blog_post_id)
+                            config = configparser.ConfigParser()
+                            config.read(os.path.join(blog_post_folder_path, "config.ini"))
+                            all_blog_post_dates.append(config["DATE"]['date'])
 
                             with open(os.path.join(blog_post_folder_path, "description.txt"), 'r') as f:
                                 all_blog_post_descriptions.append(f.read())
@@ -191,8 +195,8 @@ def export():
                         links_to_blog_posts = ""
                         blog_pages = ""
                         styles = ""
-                        for blog_post_id, blog_post_name, blog_post_description, blog_post_content, blog_post_style in zip(all_blog_post_ids, all_blog_post_names, all_blog_post_descriptions, all_blog_post_contents, all_blog_post_styles):
-                            links_to_blog_posts += f'<section><a class="h3-a" onClick="showPage(\'{blog_post_id}\')">{blog_post_name}</a><p>{blog_post_description}</p></section>\n'
+                        for blog_post_id, blog_post_name, blog_post_date, blog_post_description, blog_post_content, blog_post_style in zip(all_blog_post_ids, all_blog_post_names, all_blog_post_dates, all_blog_post_descriptions, all_blog_post_contents, all_blog_post_styles):
+                            links_to_blog_posts += f'<section><a class="h3-a" onClick="showPage(\'{blog_post_id}\')">{blog_post_name}</a><p><i class="fa fa-calendar"></i> {blog_post_date}</p><p>{blog_post_description}</p></section>\n'
                             blog_pages += f'<div id="{blog_post_id}" class="page" style="{blog_post_style}"><h1>{blog_post_name}</h2><h3>{blog_post_description}</h3>{blog_post_content}</div>\n'
 
                         right_navbar_links = ""
