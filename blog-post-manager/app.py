@@ -1,7 +1,7 @@
 from glob import glob
 from uuid import uuid4
 import os, configparser, shutil
-
+from datetime import date
 from flask import Flask, url_for, request, render_template, abort, send_file, flash
 from markupsafe import escape
 import markdown
@@ -51,6 +51,7 @@ def posts(postid):  # check GH Project for TODO list (to fix this)
                     config = configparser.ConfigParser()
                     config['NAME'] = {'post_name': request.form['title']}
                     config['EDITOR'] = {'isAdvancedMode': isAdvancedMode}
+                    config['DATE'] = {'date':date.today()}
                     config.write(f)
 
                 with open(os.path.join(blog_post_folder_path, "content.txt"), 'w') as f:
@@ -246,6 +247,7 @@ def main():
                         config = configparser.ConfigParser()
                         config['NAME'] = {'post_name': title}
                         config['EDITOR'] = {'isAdvancedMode': False}
+                        config['DATE'] = {'date':date.today()}
                         config.write(f)
 
                     with open(os.path.join(blog_post_folder_path, "content.txt"), 'w+') as f:
